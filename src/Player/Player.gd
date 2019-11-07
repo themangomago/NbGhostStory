@@ -3,7 +3,6 @@ extends KinematicBody2D
 
 enum PlayerStates {Normal, Dig, Dodge, Dead}
 
-
 const DEFAULT_GRAVITY = Vector2(0, 10)
 const MAX_JUMP_POWER = 2.5
 const MAX_AIR_TIME = 5
@@ -12,7 +11,11 @@ const JUMP_FORCE = 210
 const DODGE_DISTANCE = 5*16
 const DODGE_MINIMUM_DISTANCE = 16
 const DODGE_SAFETY_MARGIN = 7 #About the size of hitbox
-const MAX_DODGE_TIME = 1
+const MAX_DODGE_TIME = 0.2
+
+const STOP_FORCE_FLOOR = 700
+const STOP_FORCE_AIR = 100
+const WALK_FORCE = 1600
 
 var state = PlayerStates.Normal
 var active = true
@@ -31,7 +34,7 @@ func _ready():
 	$Body.modulate =  Color( 1, 1, 1, 1 )
 	add_to_group('Player')
 	
-	Engine.set_time_scale(0.1)
+	#Engine.set_time_scale(0.1)
 
 
 func _physics_process(delta):
@@ -52,14 +55,13 @@ func _physics_process(delta):
 
 
 func processNormal(delta, inputDirection):
-	var airModifier = 1
+	var onFloor = is_on_floor()
 
-	if is_on_floor():
+	if onFloor:
 		dodgeAvailable = true
 		airTime = 0
 	else:
 		airTime += 1
-
 
 	if Input.is_action_just_pressed('ui_jump'):
 		jumpPower = MAX_JUMP_POWER
@@ -72,23 +74,36 @@ func processNormal(delta, inputDirection):
 		velocity.y =- JUMP_FORCE
 
 	if Input.is_action_just_pressed('ui_dive'):
-		if $Dig/Area.get_overlapping_bodies().size() > 0:
-			if performDig($Dig/Area/Cursor.global_position):
-				stateTransition(PlayerStates.Dig)
+		var bodies = $Dig/Area.get_overlapping_bodies()
+		if bodies.size() > 0:
+			if bodies[0].is_in_group("digable"):
+				if performDig($Dig/Area/Cursor.global_position):
+					stateTransition(PlayerStates.Dig)
 	elif Input.is_action_just_pressed("ui_dodge") and not dodging and dodgeAvailable and not digged:
 		if performDodge():
 			stateTransition(PlayerStates.Dodge)
 	else:
-#		var motion
-#		if inputDirection == Vector2(0, 0):
-#			if motion.length() > amount:
-#				motion -= motion.normalized() * amount
-#			else:
-#				motion = Vector2(0, 0)
-			
-		if velocity.y != 0:
-			airModifier = 0.87
-		velocity.x = lerp(velocity.x, MAX_SPEED * inputDirection.x * airModifier, 1)
+		
+		# Stop Movement
+		if inputDirection == Vector2(0, 0):
+			var stopForce = delta
+			if onFloor:
+				stopForce *= STOP_FORCE_FLOOR
+			else:
+				stopForce *= STOP_FORCE_AIR
+
+			if velocity.x > 0:
+				velocity.x = max(velocity.x - stopForce, 0)
+			elif velocity.x < 0:
+				velocity.x = min(velocity.x + stopForce, 0)
+		# Accelarete
+		else:
+			velocity.x += inputDirection.x * delta * WALK_FORCE
+			if velocity.x > MAX_SPEED:
+				velocity.x = MAX_SPEED
+			elif velocity.x < -MAX_SPEED:
+				velocity.x = -MAX_SPEED
+		
 		velocity.y += DEFAULT_GRAVITY.y
 		velocity = move_and_slide(velocity, Vector2(0, -1))
 	
@@ -107,9 +122,9 @@ func processDig(delta, inputDirection):
 		updateDirection()
 
 
-func setCollision(state):
-	set_collision_layer_bit(0, state)
-	set_collision_mask_bit(0, state)
+func setCollision(pstate):
+	set_collision_layer_bit(0, pstate)
+	set_collision_mask_bit(0, pstate)
 
 func updateDirection():
 	if lastDirection.x == -1:
@@ -197,9 +212,9 @@ func stateTransition(to):
 		setCollision(false)
 	state = to
 
-func setDig(state):
+func setDig(pstate):
 	# Called by dig animation to block animation overwrite
-	digged = state
+	digged = pstate
 
 
 func _on_Dodge_tween_completed(object, key):

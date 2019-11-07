@@ -171,6 +171,8 @@ position = Vector2( 0, -2 )
 
 [node name="Area" type="Area2D" parent="Dig"]
 position = Vector2( 14, 0 )
+collision_layer = 3
+collision_mask = 3
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Dig/Area"]
 shape = SubResource( 2 )
@@ -199,4 +201,5 @@ anims/walk = SubResource( 9 )
 
 [node name="RayCast" type="RayCast2D" parent="."]
 cast_to = Vector2( 10, 0 )
+collision_mask = 3
 [connection signal="tween_completed" from="Tweens/Dodge" to="." method="_on_Dodge_tween_completed"]
