@@ -18,6 +18,7 @@ const STOP_FORCE_AIR = 100
 const WALK_FORCE = 1600
 
 var state = PlayerStates.Normal
+var prevState = PlayerStates.Normal
 var active = true
 
 var lastDirection = Vector2(1,0)
@@ -29,12 +30,20 @@ var anim = ""
 var digged = false
 var dodgeAvailable = true
 var dodging = false
+var jumping = false
+var hasJumped = false
+var onPlatform = false
+
+onready var trailNode = preload("res://src/Player/PlayerTrail.tscn")
 
 func _ready():
 	$Body.modulate =  Color( 1, 1, 1, 1 )
 	add_to_group('Player')
 	
-	#Engine.set_time_scale(0.1)
+	var timeScale = 1
+	
+	Engine.set_time_scale(timeScale)
+	Engine.set_iterations_per_second(60*timeScale)
 
 
 func _physics_process(delta):
@@ -55,30 +64,42 @@ func _physics_process(delta):
 
 
 func processNormal(delta, inputDirection):
-	var onFloor = is_on_floor()
+	var onFloor
+	
+	if onPlatform:
+		onFloor = true
+	else:
+		onFloor = is_on_floor()
+		
+	
+	#if airTime != 0:
+	$Label.set_text(str(anim) + " " + str(onFloor))
 
 	if onFloor:
+		if airTime > 38:
+			$Sounds/Landing.play()
 		dodgeAvailable = true
+		jumping = false
+		hasJumped = false
 		airTime = 0
 	else:
 		airTime += 1
 
-	if Input.is_action_just_pressed('ui_jump'):
-		jumpPower = MAX_JUMP_POWER
-
-	jumpPower -= 0.5
-
-	if jumpPower > 0 and airTime <= MAX_AIR_TIME:
-		jumpPower = 0
+	if Input.is_action_just_pressed('ui_jump') and not jumping and (onFloor or prevState != PlayerStates.Normal):
 		performJump()
 		velocity.y =- JUMP_FORCE
-
+		jumping = true
+		hasJumped = true
+		
 	if Input.is_action_just_pressed('ui_dive'):
 		var bodies = $Dig/Area.get_overlapping_bodies()
 		if bodies.size() > 0:
 			if bodies[0].is_in_group("digable"):
 				if performDig($Dig/Area/Cursor.global_position):
 					stateTransition(PlayerStates.Dig)
+		if state != PlayerStates.Dig:
+			if not $Sounds/Notdig.is_playing():
+				$Sounds/Notdig.play()
 	elif Input.is_action_just_pressed("ui_dodge") and not dodging and dodgeAvailable and not digged:
 		if performDodge():
 			stateTransition(PlayerStates.Dodge)
@@ -121,6 +142,11 @@ func processDig(delta, inputDirection):
 		lastDirection = inputDirection
 		updateDirection()
 
+func createTrail():
+	var instance = trailNode.instance()
+	instance.init($Body.flip_h, $Body.frame)
+	instance.position = position
+	get_parent().add_child(instance)
 
 func setCollision(pstate):
 	set_collision_layer_bit(0, pstate)
@@ -140,9 +166,9 @@ func updateAnimation():
 			anim = 'walk'
 		else:
 			anim = 'idle'
-		if(velocity.y > 0):
+		if(velocity.y > 16):
 			anim = 'falling'
-		if(velocity.y < 0):
+		elif(velocity.y < 0):
 			anim = 'jump'
 		if($AnimationPlayer.current_animation != anim):
 				$AnimationPlayer.play(anim)
@@ -176,47 +202,77 @@ func performDodge():
 	dodgeAvailable = false
 	velocity = Vector2(velocity.x, 0) # Reset motion vector
 	airTime = 0
-
-	
 	
 	#$animation.playDodge() #TODO play animation
-	var speedFactor = distance / DODGE_DISTANCE 
+	var time = (distance / DODGE_DISTANCE) * MAX_DODGE_TIME
 	var end = position + direction * distance
 	
 	Global.gm.end.position = end
+	
+	#Create Trail
+	$Timers/Trail.start()
+	createTrail()
 
-	$Tweens/Dodge.interpolate_property(self, "position", position, end, MAX_DODGE_TIME * speedFactor, Tween.TRANS_LINEAR, Tween.EASE_IN)
+	$Tweens/Dodge.interpolate_property(self, "position", position, end, time, Tween.TRANS_LINEAR, Tween.EASE_IN)
 	$Tweens/Dodge.start()
+	$Sounds/Dash.play()
 	$RayCast.enabled = false
 	return true
 
+
+
 func performDig(target):
-	#TODO check grid if tile is valid
-	var targetPos = Vector2( floor(target.x / 16) * 16, floor(target.y / 16) * 16) + Vector2(8, 8)
-	$Tweens/Dig.interpolate_property(self, 'global_position', global_position, targetPos, 0.25, Tween.TRANS_QUART, Tween.EASE_OUT)
-	$Tweens/Dig.start()
+	var coords = Global.gm.getTilePosition(target)
+	var validity = Global.gm.getTileValidity(coords)
+
+	# Inverse validity if digged
 	if digged:
-		$AnimationPlayer.play("undig")
-	else:
-		$AnimationPlayer.play("dig")
-	return true
+		validity = !validity
+
+	if validity:
+		var targetPos = coords * Vector2(16,16) + Vector2(8, 8)
+		$Tweens/Dig.interpolate_property(self, 'global_position', global_position, targetPos, 0.25, Tween.TRANS_QUART, Tween.EASE_OUT)
+		$Tweens/Dig.start()
+		if digged:
+			$AnimationPlayer.play("undig")
+			$Sounds/Undig.play()
+		else:
+			$AnimationPlayer.play("dig")
+			$Sounds/Dig.play()
+		
+		jumping = false
+		return true
+	return false
 
 func performJump():
 	$Tweens/Jump.interpolate_property($Body, 'scale', $Body.scale * Vector2(0.50, 1.50), Vector2(1,1), 0.7, Tween.TRANS_QUINT, Tween.EASE_OUT)
 	$Tweens/Jump.start()
+	$Sounds/Jump.play()
 
 func stateTransition(to):
 	if to == PlayerStates.Normal:
 		setCollision(true)
 	elif to == PlayerStates.Dig:
 		setCollision(false)
+	prevState = state
 	state = to
 
 func setDig(pstate):
 	# Called by dig animation to block animation overwrite
+	if pstate == true:
+		$Light2D.hide()
+	else:
+		$Light2D.show()
 	digged = pstate
 
 
 func _on_Dodge_tween_completed(object, key):
 	dodging = false
+	if not hasJumped:
+		jumping = true
+	$Timers/Trail.stop()
 	stateTransition(PlayerStates.Normal)
+
+
+func _on_Trail_timeout():
+	createTrail()
