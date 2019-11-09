@@ -11,7 +11,6 @@ extents = Vector2( 2, 7 )
 script = ExtResource( 2 )
 
 [node name="Rotator" type="Node2D" parent="."]
-visible = false
 position = Vector2( 8, 8 )
 
 [node name="Spike" type="Sprite" parent="Rotator"]

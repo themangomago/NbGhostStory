@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://src/GameManager.gd" type="Script" id=1]
 [ext_resource path="res://src/tileset.tres" type="TileSet" id=2]
@@ -8,9 +8,12 @@
 [ext_resource path="res://src/tilesetNormal.tres" type="TileSet" id=6]
 [ext_resource path="res://src/Objects/Spike.tscn" type="PackedScene" id=7]
 [ext_resource path="res://src/Objects/Platform.tscn" type="PackedScene" id=8]
-[ext_resource path="res://src/Objects/Crystal.tscn" type="PackedScene" id=9]
+[ext_resource path="res://src/Objects/Apple.tscn" type="PackedScene" id=9]
 [ext_resource path="res://src/Objects/Torch.tscn" type="PackedScene" id=10]
 [ext_resource path="res://assets/art/bg.png" type="Texture" id=11]
+[ext_resource path="res://src/Objects/FallingBlock.tscn" type="PackedScene" id=12]
+[ext_resource path="res://src/Objects/Crystal.tscn" type="PackedScene" id=13]
+[ext_resource path="res://src/Objects/Jumppad.tscn" type="PackedScene" id=14]
 
 [node name="GameManager" type="Node2D"]
 script = ExtResource( 1 )
@@ -28,7 +31,7 @@ centered = false
 tile_set = ExtResource( 2 )
 cell_size = Vector2( 16, 16 )
 format = 1
-tile_data = PoolIntArray( -65536, 0, 3, 0, 0, 65539, 29, 0, 3, 65536, 0, 65539, 65565, 0, 65539, 131072, 0, 65539, 131101, 0, 65539, 196608, 0, 65539, 196610, 0, 196608, 196611, 0, 196610, 196633, 0, 0, 196634, 0, 1, 196635, 0, 1, 196636, 0, 5, 196637, 0, 196615, 262144, 0, 65539, 262169, 0, 65536, 262170, 0, 65537, 262171, 0, 65537, 262172, 0, 65538, 327680, 0, 65539, 327692, 0, 3, 327705, 0, 65536, 327706, 0, 65537, 327707, 0, 65537, 327708, 0, 65538, 393216, 0, 131076, 393217, 0, 1, 393218, 0, 1, 393219, 0, 1, 393220, 0, 1, 393221, 0, 1, 393222, 0, 1, 393223, 0, 1, 393224, 0, 1, 393225, 0, 1, 393226, 0, 5, 393227, 0, 196609, 393228, 0, 196615, 393241, 0, 131072, 393242, 0, 65542, 393243, 0, 65537, 393244, 0, 65538, 458752, 0, 65540, 458753, 0, 131073, 458754, 0, 131073, 458755, 0, 131073, 458756, 0, 131073, 458757, 0, 131073, 458758, 0, 131073, 458759, 0, 131073, 458760, 0, 131073, 458761, 0, 131073, 458762, 0, 131074, 458778, 0, 131072, 458779, 0, 131073, 458780, 0, 65543, 524288, 0, 65539, 524313, 0, 3, 524316, 0, 65539, 589824, 0, 65539, 589849, 0, 65539, 589852, 0, 65539, 655360, 0, 65539, 655385, 0, 65539, 655388, 0, 65539, 720896, 0, 65539, 720900, 0, 196608, 720901, 0, 196609, 720902, 0, 196609, 720903, 0, 196610, 720907, 0, 0, 720908, 0, 2, 720915, 0, 0, 720916, 0, 1, 720917, 0, 1, 720918, 0, 5, 720919, 0, 196609, 720920, 0, 6, 720921, 0, 131079, 720923, 0, 0, 720924, 0, 131079, 786432, 0, 65539, 786443, 0, 65536, 786444, 0, 131077, 786445, 0, 2, 786449, 0, 0, 786450, 0, 1, 786451, 0, 131078, 786452, 0, 65537, 786453, 0, 65541, 786454, 0, 131074, 786456, 0, 65536, 786457, 0, 131077, 786458, 0, 1, 786459, 0, 131078, 786460, 0, 65538, 851968, 0, 65539, 851973, 0, 4, 851974, 0, 196609, 851975, 0, 196609, 851976, 0, 196609, 851977, 0, 196609, 851978, 0, 196609, 851979, 0, 196614, 851980, 0, 131073, 851981, 0, 196613, 851982, 0, 196609, 851983, 0, 196609, 851984, 0, 196609, 851985, 0, 196614, 851986, 0, 131073, 851987, 0, 131073, 851988, 0, 131073, 851989, 0, 131074, 851992, 0, 131072, 851993, 0, 131073, 851994, 0, 131073, 851995, 0, 131073, 851996, 0, 131074, 917504, 0, 131076, 917505, 0, 1, 917506, 0, 1, 917507, 0, 1, 917508, 0, 5, 917509, 0, 196615, 983040, 0, 65536, 983041, 0, 65537, 983042, 0, 65541, 983043, 0, 131073, 983044, 0, 131074, 1048576, 0, 131072, 1048577, 0, 131073, 1048578, 0, 131074 )
+tile_data = PoolIntArray( -65536, 0, 3, 0, 0, 65539, 29, 0, 3, 65536, 0, 65539, 65565, 0, 65539, 131072, 0, 65539, 131101, 0, 65539, 196608, 0, 65539, 196610, 0, 196608, 196611, 0, 196610, 196633, 0, 0, 196634, 0, 1, 196635, 0, 1, 196636, 0, 5, 196637, 0, 196615, 262144, 0, 65539, 262169, 0, 65536, 262170, 0, 65537, 262171, 0, 65537, 262172, 0, 65538, 327680, 0, 65539, 327692, 0, 3, 327705, 0, 65536, 327706, 0, 65537, 327707, 0, 65537, 327708, 0, 65538, 393216, 0, 131076, 393217, 0, 1, 393218, 0, 1, 393219, 0, 1, 393220, 0, 1, 393221, 0, 1, 393222, 0, 1, 393223, 0, 5, 393224, 0, 196610, 393226, 0, 196608, 393227, 0, 196609, 393228, 0, 196615, 393241, 0, 131072, 393242, 0, 65542, 393243, 0, 65537, 393244, 0, 65538, 458752, 0, 65540, 458753, 0, 131073, 458754, 0, 131073, 458755, 0, 131073, 458756, 0, 131073, 458757, 0, 131073, 458758, 0, 131073, 458759, 0, 131074, 458778, 0, 131072, 458779, 0, 131073, 458780, 0, 65543, 524288, 0, 65539, 524313, 0, 3, 524316, 0, 65539, 589824, 0, 65539, 589849, 0, 65539, 589852, 0, 65539, 655360, 0, 65539, 655373, 0, 196608, 655374, 0, 196609, 655375, 0, 6, 655376, 0, 1, 655377, 0, 1, 655378, 0, 2, 655385, 0, 65539, 655388, 0, 65539, 720896, 0, 65539, 720900, 0, 196608, 720901, 0, 196609, 720902, 0, 196609, 720903, 0, 196610, 720907, 0, 0, 720908, 0, 2, 720911, 0, 131072, 720912, 0, 131073, 720913, 0, 65542, 720914, 0, 131077, 720915, 0, 1, 720916, 0, 1, 720917, 0, 1, 720918, 0, 5, 720919, 0, 196609, 720920, 0, 6, 720921, 0, 131079, 720923, 0, 0, 720924, 0, 131079, 786432, 0, 65539, 786443, 0, 65536, 786444, 0, 131077, 786445, 0, 2, 786449, 0, 65536, 786450, 0, 65537, 786451, 0, 65537, 786452, 0, 65537, 786453, 0, 65541, 786454, 0, 131074, 786456, 0, 65536, 786457, 0, 131077, 786458, 0, 1, 786459, 0, 131078, 786460, 0, 65538, 851968, 0, 65539, 851973, 0, 4, 851974, 0, 196609, 851975, 0, 196609, 851976, 0, 196609, 851977, 0, 196609, 851978, 0, 196609, 851979, 0, 196614, 851980, 0, 131073, 851981, 0, 196613, 851982, 0, 196609, 851983, 0, 196609, 851984, 0, 196609, 851985, 0, 196614, 851986, 0, 131073, 851987, 0, 131073, 851988, 0, 131073, 851989, 0, 131074, 851992, 0, 131072, 851993, 0, 131073, 851994, 0, 131073, 851995, 0, 131073, 851996, 0, 131074, 917504, 0, 131076, 917505, 0, 1, 917506, 0, 1, 917507, 0, 1, 917508, 0, 5, 917509, 0, 196615, 983040, 0, 65536, 983041, 0, 65537, 983042, 0, 65541, 983043, 0, 131073, 983044, 0, 131074, 1048576, 0, 131072, 1048577, 0, 131073, 1048578, 0, 131074 )
 __meta__ = {
 "_edit_lock_": true
 }
@@ -43,6 +46,60 @@ tile_data = PoolIntArray( 65544, 3, 0, 65545, 3, 0, 65546, 3, 0, 65560, 4, 0, 13
 __meta__ = {
 "_edit_lock_": true
 }
+
+[node name="Objects" type="Node2D" parent="."]
+
+[node name="Spike" parent="Objects" instance=ExtResource( 7 )]
+position = Vector2( 16, 16 )
+
+[node name="Spike2" parent="Objects" instance=ExtResource( 7 )]
+position = Vector2( 64, 32 )
+direction = 3
+
+[node name="Spike3" parent="Objects" instance=ExtResource( 7 )]
+position = Vector2( 48, 0 )
+direction = 2
+
+[node name="Spike4" parent="Objects" instance=ExtResource( 7 )]
+position = Vector2( 32, 32 )
+direction = 0
+
+[node name="Platform" parent="Objects" instance=ExtResource( 8 )]
+position = Vector2( 304, 160 )
+tiles = 7
+
+[node name="Torch" parent="Objects" instance=ExtResource( 10 )]
+position = Vector2( 160, 48 )
+
+[node name="Crystal" parent="Objects" instance=ExtResource( 9 )]
+position = Vector2( 128, 80 )
+
+[node name="Crystal2" parent="Objects" instance=ExtResource( 9 )]
+position = Vector2( 112, 64 )
+
+[node name="Crystal3" parent="Objects" instance=ExtResource( 9 )]
+position = Vector2( 96, 64 )
+
+[node name="Crystal4" parent="Objects" instance=ExtResource( 9 )]
+position = Vector2( 80, 64 )
+
+[node name="Crystal5" parent="Objects" instance=ExtResource( 9 )]
+position = Vector2( 64, 80 )
+
+[node name="FallingBlock" parent="Objects" instance=ExtResource( 12 )]
+position = Vector2( 224, 48 )
+
+[node name="FallingBlock2" parent="Objects" instance=ExtResource( 12 )]
+position = Vector2( 240, 48 )
+
+[node name="FallingBlock3" parent="Objects" instance=ExtResource( 12 )]
+position = Vector2( 256, 48 )
+
+[node name="Crystal6" parent="Objects" instance=ExtResource( 13 )]
+position = Vector2( 176, 144 )
+
+[node name="Jumppad" parent="Objects" instance=ExtResource( 14 )]
+position = Vector2( 256, 144 )
 
 [node name="Player" parent="." instance=ExtResource( 3 )]
 position = Vector2( 272, 16 )
@@ -65,44 +122,3 @@ texture = ExtResource( 5 )
 visible = false
 modulate = Color( 0.431373, 0.92549, 0.0235294, 1 )
 texture = ExtResource( 5 )
-
-[node name="Spike" parent="." instance=ExtResource( 7 )]
-position = Vector2( 16, 16 )
-
-[node name="Spike2" parent="." instance=ExtResource( 7 )]
-position = Vector2( 64, 32 )
-direction = 3
-
-[node name="Spike3" parent="." instance=ExtResource( 7 )]
-position = Vector2( 48, 0 )
-direction = 2
-
-[node name="Spike4" parent="." instance=ExtResource( 7 )]
-position = Vector2( 32, 32 )
-direction = 0
-
-[node name="Platform" parent="." instance=ExtResource( 8 )]
-position = Vector2( 304, 160 )
-tiles = 7
-
-[node name="Platform2" parent="." instance=ExtResource( 8 )]
-position = Vector2( 224, 48 )
-direction = 3
-
-[node name="Torch" parent="." instance=ExtResource( 10 )]
-position = Vector2( 160, 48 )
-
-[node name="Crystal" parent="." instance=ExtResource( 9 )]
-position = Vector2( 128, 80 )
-
-[node name="Crystal2" parent="." instance=ExtResource( 9 )]
-position = Vector2( 112, 64 )
-
-[node name="Crystal3" parent="." instance=ExtResource( 9 )]
-position = Vector2( 96, 64 )
-
-[node name="Crystal4" parent="." instance=ExtResource( 9 )]
-position = Vector2( 80, 64 )
-
-[node name="Crystal5" parent="." instance=ExtResource( 9 )]
-position = Vector2( 64, 80 )

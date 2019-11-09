@@ -1,10 +1,18 @@
 extends Node2D
 
 #TODO:
-# - Jumppad
-# - Bubble Reset jump/dash
-
+# - Lava
 # - Light deactive/shadow deactive for enemy in get_tree().get_nodes_in_group("light)
+# - Level Transition
+# - Stage Transition and restart (kill)
+
+# - UI (Deadcount, Time, Apples)
+# - Menu
+# - Savegame
+
+# - Levels
+
+
 
 onready var col = $col
 onready var end = $end
@@ -12,6 +20,10 @@ onready var end = $end
 func _ready():
 	Global.setGameManager(self)
 	Global.debugLabel = $Debug
+
+func reset():
+	for node in get_tree().get_nodes_in_group("resetState"):
+		node.reset()
 
 func getTilePosition(pos):
 	var coords = $WorldDigable.world_to_map(pos)

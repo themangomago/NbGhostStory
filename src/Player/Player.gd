@@ -8,6 +8,7 @@ const MAX_JUMP_POWER = 2.5
 const MAX_AIR_TIME = 5
 const MAX_SPEED = 120
 const JUMP_FORCE = 210
+const JUMPPAD_FORCE = 338
 const DODGE_DISTANCE = 5*16
 const DODGE_MINIMUM_DISTANCE = 16
 const DODGE_SAFETY_MARGIN = 7 #About the size of hitbox
@@ -33,6 +34,7 @@ var dodging = false
 var jumping = false
 var hasJumped = false
 var onPlatform = false
+var isOnJumpPad = false
 
 onready var trailNode = preload("res://src/Player/PlayerTrail.tscn")
 
@@ -40,15 +42,14 @@ func _ready():
 	$Body.modulate =  Color( 1, 1, 1, 1 )
 	add_to_group('Player')
 	
-	var timeScale = 1
+	var timeScale =  1
 	
 	Engine.set_time_scale(timeScale)
 	Engine.set_iterations_per_second(60*timeScale)
 
-
 func _physics_process(delta):
 	updateAnimation()
-	Global.debugLabel.set_text(str(velocity.x))
+	$Help.updateUI(hasJumped, dodgeAvailable)
 	
 	if active:
 		var inputDirection: Vector2
@@ -61,6 +62,12 @@ func _physics_process(delta):
 		if inputDirection != Vector2(): 
 			$Dig.rotation = inputDirection.angle()
 			raycastDirection = inputDirection
+	
+	if Input.is_action_just_pressed("ui_reset"):
+		Global.gm.reset()
+		
+	$Label.set_text(str(dodgeAvailable) + " " + str(dodging))
+		
 
 
 func processNormal(delta, inputDirection):
@@ -71,6 +78,7 @@ func processNormal(delta, inputDirection):
 	else:
 		onFloor = is_on_floor()
 		
+	Global.debugLabel.set_text(str(onFloor) + " " + str(onPlatform))
 	
 	#if airTime != 0:
 	$Label.set_text(str(anim) + " " + str(onFloor))
@@ -78,19 +86,28 @@ func processNormal(delta, inputDirection):
 	if onFloor:
 		if airTime > 38:
 			$Sounds/Landing.play()
-		dodgeAvailable = true
+		elif airTime == 0:
+			dodgeAvailable = true
 		jumping = false
 		hasJumped = false
 		airTime = 0
 	else:
 		airTime += 1
+	
+	
 
 	if Input.is_action_just_pressed('ui_jump') and not jumping and (onFloor or prevState != PlayerStates.Normal):
 		performJump()
 		velocity.y =- JUMP_FORCE
 		jumping = true
 		hasJumped = true
-		
+	
+	if isOnJumpPad:
+		velocity.y =- JUMPPAD_FORCE 
+		jumping = true
+		isOnJumpPad = false
+
+
 	if Input.is_action_just_pressed('ui_dive'):
 		var bodies = $Dig/Area.get_overlapping_bodies()
 		if bodies.size() > 0:
@@ -102,6 +119,8 @@ func processNormal(delta, inputDirection):
 				$Sounds/Notdig.play()
 	elif Input.is_action_just_pressed("ui_dodge") and not dodging and dodgeAvailable and not digged:
 		if performDodge():
+			dodgeAvailable = false
+			airTime += 1 #workaround as on floor is not updated to reset dodge properly
 			stateTransition(PlayerStates.Dodge)
 	else:
 		
@@ -185,6 +204,7 @@ func performDodge():
 	var direction = raycastDirection.normalized()
 	var distance = DODGE_DISTANCE
 
+
 	$RayCast.cast_to = direction * DODGE_DISTANCE
 	$RayCast.enabled = true
 	$RayCast.force_raycast_update()
@@ -218,7 +238,6 @@ func performDodge():
 	$Sounds/Dash.play()
 	$RayCast.enabled = false
 	return true
-
 
 
 func performDig(target):
@@ -276,3 +295,8 @@ func _on_Dodge_tween_completed(object, key):
 
 func _on_Trail_timeout():
 	createTrail()
+
+func isStateNormal():
+	if state == PlayerStates.Normal:
+		return true
+	return false
