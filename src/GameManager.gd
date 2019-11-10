@@ -1,4 +1,4 @@
-extends Node2D
+extends Control
 
 #TODO:
 # - Lava
@@ -12,29 +12,54 @@ extends Node2D
 
 # - Levels
 
+enum GameStates {Menu, Game} 
 
+var state = GameStates.Menu
+
+var worldDigable = null
+var worldNormal = null
 
 onready var col = $col
 onready var end = $end
-# Called when the node enters the scene tree for the first time.
+
+onready var level0 = preload("res://src/Levels/Level0.tscn")
+
 func _ready():
 	Global.setGameManager(self)
-	Global.debugLabel = $Debug
+	Global.debugLabel = $gameViewport/Viewport/Debug
+	
+	loadLevel()
+
+func loadLevel():
+	var level = level0.instance()
+	$gameViewport.add_child(level)
 
 func reset():
 	for node in get_tree().get_nodes_in_group("resetState"):
 		node.reset()
 
 func getTilePosition(pos):
-	var coords = $WorldDigable.world_to_map(pos)
+	var coords = worldDigable.world_to_map(pos)
 	#print(coords)
 	return coords
 
 func getTileValidity(coords):
 	var validity = false
-	var tileId = $WorldDigable.get_cellv(coords)
+	var tileId = worldDigable.get_cellv(coords)
 	if tileId != -1:
-		if $WorldNormal.get_cellv(coords) == -1:
+		if worldNormal.get_cellv(coords) == -1:
 			validity = true
 	#print(tileId)
 	return validity
+
+func setWorlds(digable, normal):
+	worldDigable = digable
+	worldNormal = normal
+
+func stateTransition(to):
+	if to == GameStates.Menu:
+		$gameViewport.hide()
+		$menuViewport.show()
+	elif to == GameStates.Game:
+		$gameViewport.show()
+		$menuViewport.hide()

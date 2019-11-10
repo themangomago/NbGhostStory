@@ -211,7 +211,7 @@ func performDodge():
 	
 	# Dodge Range Check
 	if $RayCast.get_collider() != null:
-		Global.gm.col.position = $RayCast.get_collision_point()
+		#Global.gm.col.position = $RayCast.get_collision_point()
 		distance = position.distance_to($RayCast.get_collision_point()) - DODGE_SAFETY_MARGIN
 		
 		if distance <= DODGE_MINIMUM_DISTANCE:
@@ -227,8 +227,7 @@ func performDodge():
 	var time = (distance / DODGE_DISTANCE) * MAX_DODGE_TIME
 	var end = position + direction * distance
 	
-	Global.gm.end.position = end
-	
+
 	#Create Trail
 	$Timers/Trail.start()
 	createTrail()
