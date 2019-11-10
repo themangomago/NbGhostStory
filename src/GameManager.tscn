@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=3 format=2]
 
 [ext_resource path="res://src/GameManager.gd" type="Script" id=1]
+[ext_resource path="res://src/Camera.gd" type="Script" id=2]
 
 [node name="GameManager" type="Control"]
 anchor_right = 1.0
@@ -26,6 +27,13 @@ usage = 0
 render_direct_to_screen = true
 render_target_update_mode = 3
 audio_listener_enable_2d = true
+
+[node name="Camera" type="Camera2D" parent="gameViewport/Viewport"]
+anchor_mode = 0
+current = true
+script = ExtResource( 2 )
+
+[node name="Tween" type="Tween" parent="gameViewport/Viewport/Camera"]
 
 [node name="Debug" type="Label" parent="gameViewport/Viewport"]
 margin_right = 40.0

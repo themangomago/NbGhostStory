@@ -25,6 +25,7 @@ onready var end = $end
 onready var level0 = preload("res://src/Levels/Level0.tscn")
 
 func _ready():
+	print("gm")
 	Global.setGameManager(self)
 	Global.debugLabel = $gameViewport/Viewport/Debug
 	
@@ -63,3 +64,4 @@ func stateTransition(to):
 	elif to == GameStates.Game:
 		$gameViewport.show()
 		$menuViewport.hide()
+

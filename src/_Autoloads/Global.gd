@@ -33,6 +33,7 @@ var userConfig = {
 
 # GameMasterNode
 var gm = null
+var cam = null
 
 # Debug Label
 var debugLabel = null
@@ -117,3 +118,9 @@ func getVersion():
 # Get Version String
 func getVersionString():
 	return "" + str(version.major) + "." + str(version.minor)
+
+func setCam(node):
+	cam = node
+
+func getCam():
+	return cam

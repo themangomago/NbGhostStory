@@ -38,9 +38,15 @@ var isOnJumpPad = false
 
 onready var trailNode = preload("res://src/Player/PlayerTrail.tscn")
 
+var stagePositionOffset = Vector2()
+
+
 func _ready():
 	$Body.modulate =  Color( 1, 1, 1, 1 )
 	add_to_group('Player')
+	
+	stagePositionOffset = get_parent().position
+
 	
 	var timeScale =  1
 	
@@ -50,6 +56,7 @@ func _ready():
 func _physics_process(delta):
 	updateAnimation()
 	$Help.updateUI(hasJumped, dodgeAvailable)
+	levelBoundariesCheck()
 	
 	if active:
 		var inputDirection: Vector2
@@ -66,8 +73,20 @@ func _physics_process(delta):
 	if Input.is_action_just_pressed("ui_reset"):
 		Global.gm.reset()
 		
-	$Label.set_text(str(dodgeAvailable) + " " + str(dodging))
-		
+	
+
+func levelBoundariesCheck():
+	$Label.set_text(str(position))
+	# 480x270  | 12	
+	if active:
+		if position.x > (480 - 12 + stagePositionOffset.x):
+			Global.getCam().transition(Types.Direction.Right)
+		elif position.x < (12 + stagePositionOffset.x):
+			Global.getCam().transition(Types.Direction.Left)
+		elif position.y < (12 + stagePositionOffset.y):
+			Global.getCam().transition(Types.Direction.Up)
+		elif position.y > (270 - 12 + stagePositionOffset.y):
+			Global.getCam().transition(Types.Direction.Up)
 
 
 func processNormal(delta, inputDirection):
@@ -78,10 +97,8 @@ func processNormal(delta, inputDirection):
 	else:
 		onFloor = is_on_floor()
 		
-	Global.debugLabel.set_text(str(onFloor) + " " + str(onPlatform))
+	#Global.debugLabel.set_text(str(onFloor) + " " + str(onPlatform))
 	
-	#if airTime != 0:
-	$Label.set_text(str(anim) + " " + str(onFloor))
 
 	if onFloor:
 		if airTime > 38:
