@@ -4,10 +4,9 @@ enum CamStates {Static, Transition}
 
 var state = CamStates.Static
 
-onready var levelHolder = get_parent().get_node("LevelHolder")
 onready var tween = $Tween
 
-
+#warning-ignore:unused_argument
 func _physics_process(delta):
 	get_node("Debug").set_text(str(position))
 
@@ -41,6 +40,7 @@ func transitionToScreen(to):
 #		return true
 #	return false
 
-
+#warning-ignore:unused_argument
+#warning-ignore:unused_argument
 func _on_Tween_tween_completed(object, key):
 	state = CamStates.Static

@@ -1,9 +1,7 @@
 extends Control
 
 #TODO:
-# - Dead ey 
 # - Light deactive/shadow deactive for enemy in get_tree().get_nodes_in_group("light)
-
 # - UI (Deadcount, Time, Apples)
 # - Menu
 # - Savegame
@@ -20,15 +18,14 @@ var worldDigable = null
 var worldNormal = null
 var level = null
 
-onready var col = $col
-onready var end = $end
+var deadCount = 0
 
 onready var level0 = preload("res://src/Levels/Level0.tscn")
 
 func _ready():
 	print("gm")
 	Global.setGameManager(self)
-	Global.debugLabel = $gameViewport/Viewport/Debug
+	Global.debugLabel = $gameViewport/Viewport/Camera/Debug
 	
 	loadLevel()
 
@@ -39,8 +36,8 @@ func getLevel():
 	return level
 
 func loadLevel():
-	var level = level0.instance()
-	$gameViewport.get_node("Viewport/LevelHolder").add_child(level)
+	var levelInstance = level0.instance()
+	$gameViewport.get_node("Viewport/LevelHolder").add_child(levelInstance)
 
 func reset():
 	for node in get_tree().get_nodes_in_group("resetState"):
@@ -71,4 +68,5 @@ func stateTransition(to):
 	elif to == GameStates.Game:
 		$gameViewport.show()
 		$menuViewport.hide()
+	state = to
 

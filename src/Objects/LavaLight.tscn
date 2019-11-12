@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://assets/art/dummylight.png" type="Texture" id=1]
+
+[node name="LavaLight" type="Light2D" groups=[
+"light",
+]]
+texture = ExtResource( 1 )
+texture_scale = 0.2
+color = Color( 1, 0, 0, 1 )
+shadow_enabled = true

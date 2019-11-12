@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=16 format=2]
 
 [ext_resource path="res://assets/art/player/indicator.png" type="Texture" id=1]
 [ext_resource path="res://assets/art/bg.png" type="Texture" id=2]
@@ -9,6 +9,8 @@
 [ext_resource path="res://src/Objects/Transition.tscn" type="PackedScene" id=7]
 [ext_resource path="res://src/Objects/StaticPlatform.tscn" type="PackedScene" id=8]
 [ext_resource path="res://src/Objects/Spike.tscn" type="PackedScene" id=9]
+[ext_resource path="res://src/Objects/LavaLight.tscn" type="PackedScene" id=10]
+[ext_resource path="res://src/Objects/Dead.tscn" type="PackedScene" id=11]
 [ext_resource path="res://src/Objects/Jumppad.tscn" type="PackedScene" id=15]
 [ext_resource path="res://src/Objects/Crystal.tscn" type="PackedScene" id=17]
 [ext_resource path="res://src/Objects/FallingBlock.tscn" type="PackedScene" id=18]
@@ -119,6 +121,13 @@ direction = 3
 [node name="Spike3" parent="Objects" instance=ExtResource( 9 )]
 position = Vector2( 368, 176 )
 direction = 3
+
+[node name="LavaLight" parent="Objects" instance=ExtResource( 10 )]
+position = Vector2( 352, 240 )
+
+[node name="Dead" parent="Objects/LavaLight" instance=ExtResource( 11 )]
+position = Vector2( -80, -16 )
+scale = Vector2( 9.31999, 1 )
 
 [node name="testblob" parent="." instance=ExtResource( 19 )]
 position = Vector2( 137, 261 )

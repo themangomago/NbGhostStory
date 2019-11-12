@@ -1,6 +1,6 @@
 extends Node2D
 
-var body = null
+var block = null
 var doomed = false
 
 func _ready():
@@ -22,7 +22,7 @@ func reset():
 	$StaticBody2D/CollisionShape2D.disabled = false
 	$Area/CollisionShape2D.disabled = false
 	$RespawnTimer.stop()
-	body = null
+	block = null
 	doomed = false
 	$AnimationPlayer.stop()
 
@@ -36,13 +36,13 @@ func _on_RespawnTimer_timeout():
 func _on_Area_body_entered(body):
 	if body.is_in_group("player") and not doomed:
 		if body.isStateNormal():
-			self.body = body
+			self.block = body
 			$CheckTimer.start()
 			#TODO: might be a problem if the player dashes directly into the area
 
 func _on_Area_body_exited(body):
 	if body.is_in_group("player") and not doomed:
-		body = null
+		block = null
 
 func _on_CheckTimer_timeout():
 	doomed = true

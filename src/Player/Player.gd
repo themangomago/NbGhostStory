@@ -43,7 +43,7 @@ var restartPoint = Vector2()
 
 func _ready():
 	$Body.modulate =  Color( 1, 1, 1, 1 )
-	
+	$Body.position = Vector2(0,0)
 	stagePositionOffset = get_parent().position
 	restartPoint = position
 	
@@ -53,10 +53,11 @@ func _ready():
 	Engine.set_iterations_per_second(60*timeScale)
 
 func _physics_process(delta):
-	updateAnimation()
+	
 	$Help.updateUI(hasJumped, dodgeAvailable)
 	
 	if active:
+		updateAnimation()
 		var inputDirection: Vector2
 		inputDirection = getInputDirection()
 		if state == PlayerStates.Normal:
@@ -77,7 +78,8 @@ func reset():
 	position = restartPoint
 	velocity = Vector2(0, 0)
 	airTime = 0
-	
+	$Body.position = Vector2(0,0)
+	$Body.modulate =  Color( 1, 1, 1, 1 )
 
 func transition(toNode):
 	if not isTransitioning:
@@ -291,8 +293,10 @@ func performJump():
 
 func stateTransition(to):
 	if to == PlayerStates.Normal:
+		$Eyes.hide()
 		setCollision(true)
 	elif to == PlayerStates.Dig:
+		$Eyes.show()
 		setCollision(false)
 	prevState = state
 	state = to
@@ -314,7 +318,11 @@ func _on_Dodge_tween_completed(object, key):
 	$Timers/Trail.stop()
 	stateTransition(PlayerStates.Normal)
 
-
+func kill():
+	active = false
+	$AnimationPlayer.play("die")
+	Global.getGameManager().deadCount += 1
+	
 func _on_Trail_timeout():
 	createTrail()
 
@@ -328,3 +336,9 @@ func isStateNormal():
 func _on_Transition_tween_completed(object, key):
 	isTransitioning = false
 	airTime = 0
+
+
+func _on_AnimationPlayer_animation_finished(anim_name):
+	if anim_name == "die":
+		reset()
+		active = true

@@ -16,4 +16,4 @@ func _ready():
 
 func _on_Area_body_entered(body):
 	if body.is_in_group("player"):
-		print("ouch")
+		body.kill()
