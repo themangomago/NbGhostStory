@@ -8,6 +8,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 script = ExtResource( 1 )
 __meta__ = {
+"_edit_lock_": true,
 "_edit_use_anchors_": false
 }
 
@@ -15,6 +16,7 @@ __meta__ = {
 anchor_right = 1.0
 anchor_bottom = 1.0
 __meta__ = {
+"_edit_lock_": true,
 "_edit_use_anchors_": false
 }
 
@@ -28,21 +30,21 @@ render_direct_to_screen = true
 render_target_update_mode = 3
 audio_listener_enable_2d = true
 
+[node name="LevelHolder" type="Node2D" parent="gameViewport/Viewport"]
+
 [node name="Camera" type="Camera2D" parent="gameViewport/Viewport"]
 anchor_mode = 0
 current = true
 script = ExtResource( 2 )
 
-[node name="Debug" type="Label" parent="gameViewport/Viewport"]
+[node name="Tween" type="Tween" parent="gameViewport/Viewport/Camera"]
+
+[node name="Debug" type="Label" parent="gameViewport/Viewport/Camera"]
 margin_right = 40.0
 margin_bottom = 14.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
-
-[node name="LevelHolder" type="Node2D" parent="gameViewport/Viewport"]
-
-[node name="Tween" type="Tween" parent="gameViewport/Viewport/LevelHolder"]
 
 [node name="menuViewport" type="ViewportContainer" parent="."]
 visible = false
@@ -61,4 +63,4 @@ usage = 0
 render_direct_to_screen = true
 render_target_update_mode = 0
 audio_listener_enable_2d = true
-[connection signal="tween_completed" from="gameViewport/Viewport/LevelHolder/Tween" to="gameViewport/Viewport/Camera" method="_on_Tween_tween_completed"]
+[connection signal="tween_completed" from="gameViewport/Viewport/Camera/Tween" to="gameViewport/Viewport/Camera" method="_on_Tween_tween_completed"]

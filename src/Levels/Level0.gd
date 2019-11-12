@@ -1,8 +1,4 @@
 
-extends Node2D
+extends Level
 
-
-
-func _ready():
-	Global.gm.setWorlds($WorldDigable, $WorldNormal)
 

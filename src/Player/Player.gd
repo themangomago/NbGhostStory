@@ -25,7 +25,6 @@ var active = true
 var lastDirection = Vector2(1,0)
 var raycastDirection = Vector2(1,0)
 var velocity = Vector2(0,0)
-var jumpPower = 0
 var airTime = 0
 var anim = ""
 var digged = false
@@ -35,18 +34,18 @@ var jumping = false
 var hasJumped = false
 var onPlatform = false
 var isOnJumpPad = false
+var isTransitioning = false
 
 onready var trailNode = preload("res://src/Player/PlayerTrail.tscn")
 
 var stagePositionOffset = Vector2()
-
+var restartPoint = Vector2()
 
 func _ready():
 	$Body.modulate =  Color( 1, 1, 1, 1 )
-	add_to_group('Player')
 	
 	stagePositionOffset = get_parent().position
-
+	restartPoint = position
 	
 	var timeScale =  1
 	
@@ -56,7 +55,6 @@ func _ready():
 func _physics_process(delta):
 	updateAnimation()
 	$Help.updateUI(hasJumped, dodgeAvailable)
-	levelBoundariesCheck()
 	
 	if active:
 		var inputDirection: Vector2
@@ -64,31 +62,37 @@ func _physics_process(delta):
 		if state == PlayerStates.Normal:
 			processNormal(delta, inputDirection)
 		elif state == PlayerStates.Dig:
-			processDig(delta, inputDirection)
+			processDig(inputDirection)
 		
 		if inputDirection != Vector2(): 
 			$Dig.rotation = inputDirection.angle()
 			raycastDirection = inputDirection
 	
 	if Input.is_action_just_pressed("ui_reset"):
-		Global.gm.reset()
+		reset()
 		
+
+func reset():
+	Global.gm.reset()
+	position = restartPoint
+	velocity = Vector2(0, 0)
+	airTime = 0
 	
 
-func levelBoundariesCheck():
-	$Label.set_text(str(position))
-	# 480x270  | 12	
-	if active:
-		if position.x > (480 - 12 + stagePositionOffset.x):
-			Global.getCam().transition(Types.Direction.Right)
-		elif position.x < (12 + stagePositionOffset.x):
-			Global.getCam().transition(Types.Direction.Left)
-		elif position.y < (12 + stagePositionOffset.y):
-			Global.getCam().transition(Types.Direction.Top)
-		elif position.y > (270 - 12 + stagePositionOffset.y):
-			Global.getCam().transition(Types.Direction.Down)
-
-
+func transition(toNode):
+	if not isTransitioning:
+		isTransitioning = true
+		#Cam Transition
+		var pos = (toNode.position / Vector2(480, 272))
+		if pos.y < 0: pos.y -= 1
+		if pos.x < 0: pos.x -= 1
+		pos = Vector2(int(pos.x), int(pos.y))
+		Global.getCam().transitionToScreen(pos)
+		print("Trans to " + str(pos))
+		#Move Player To Target
+		$Tweens/Transition.interpolate_property(self, "position", position, toNode.position, 0.3, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
+		$Tweens/Transition.start()
+		restartPoint = toNode.position
 
 func processNormal(delta, inputDirection):
 	var onFloor
@@ -168,7 +172,7 @@ func processNormal(delta, inputDirection):
 		lastDirection = inputDirection
 	updateDirection()
 
-func processDig(delta, inputDirection):
+func processDig(inputDirection):
 	if active:
 		if Input.is_action_just_pressed('ui_dive'):
 			if $Dig/Area.get_overlapping_bodies().size() == 0:
@@ -301,7 +305,8 @@ func setDig(pstate):
 		$Light2D.show()
 	digged = pstate
 
-
+#warning-ignore:unused_argument
+#warning-ignore:unused_argument
 func _on_Dodge_tween_completed(object, key):
 	dodging = false
 	if not hasJumped:
@@ -317,3 +322,9 @@ func isStateNormal():
 	if state == PlayerStates.Normal:
 		return true
 	return false
+
+#warning-ignore:unused_argument
+#warning-ignore:unused_argument
+func _on_Transition_tween_completed(object, key):
+	isTransitioning = false
+	airTime = 0

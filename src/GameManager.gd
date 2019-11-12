@@ -1,10 +1,8 @@
 extends Control
 
 #TODO:
-# - Lava
+# - Dead ey 
 # - Light deactive/shadow deactive for enemy in get_tree().get_nodes_in_group("light)
-# - Level Transition
-# - Stage Transition and restart (kill)
 
 # - UI (Deadcount, Time, Apples)
 # - Menu
@@ -12,12 +10,15 @@ extends Control
 
 # - Levels
 
+# Justify https://godotengine.org/qa/39374/godot-xyz-declared-but-never-used-the-script-how-store-vars-now
+
 enum GameStates {Menu, Game} 
 
 var state = GameStates.Menu
 
 var worldDigable = null
 var worldNormal = null
+var level = null
 
 onready var col = $col
 onready var end = $end
@@ -30,6 +31,12 @@ func _ready():
 	Global.debugLabel = $gameViewport/Viewport/Debug
 	
 	loadLevel()
+
+func setLevel(node):
+	level = node
+
+func getLevel():
+	return level
 
 func loadLevel():
 	var level = level0.instance()

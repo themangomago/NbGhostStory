@@ -10,6 +10,6 @@ func _on_Area_body_entered(body):
 			$AnimationPlayer.play("jump")
 			
 
-
+#warning-ignore:unused_argument
 func _on_AnimationPlayer_animation_finished(anim_name):
 	triggerd = false

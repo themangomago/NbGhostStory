@@ -37,6 +37,7 @@ var cam = null
 
 # Debug Label
 var debugLabel = null
+var debug = true
 
 # RNG base
 var rng = RandomNumberGenerator.new()
@@ -124,3 +125,9 @@ func setCam(node):
 
 func getCam():
 	return cam
+
+func getDebug():
+	if debug:
+		return debugLabel
+	return null
+

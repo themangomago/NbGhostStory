@@ -6,5 +6,6 @@ func init(direction, frame):
 	
 
 func _on_AnimationPlayer_animation_finished(anim_name):
+	assert(anim_name != null)
 	get_parent().remove_child(self)
 	queue_free()
