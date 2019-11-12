@@ -33,7 +33,7 @@ func _ready():
 
 func loadLevel():
 	var level = level0.instance()
-	$gameViewport.add_child(level)
+	$gameViewport.get_node("Viewport/LevelHolder").add_child(level)
 
 func reset():
 	for node in get_tree().get_nodes_in_group("resetState"):

@@ -84,9 +84,10 @@ func levelBoundariesCheck():
 		elif position.x < (12 + stagePositionOffset.x):
 			Global.getCam().transition(Types.Direction.Left)
 		elif position.y < (12 + stagePositionOffset.y):
-			Global.getCam().transition(Types.Direction.Up)
+			Global.getCam().transition(Types.Direction.Top)
 		elif position.y > (270 - 12 + stagePositionOffset.y):
-			Global.getCam().transition(Types.Direction.Up)
+			Global.getCam().transition(Types.Direction.Down)
+
 
 
 func processNormal(delta, inputDirection):
