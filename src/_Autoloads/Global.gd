@@ -34,6 +34,7 @@ var userConfig = {
 # GameMasterNode
 var gm = null
 var cam = null
+var hud = null
 
 # Debug Label
 var debugLabel = null
@@ -54,6 +55,12 @@ func setGameManager(node):
 # GameManager Get
 func getGameManager():
 	return gm
+
+func setHUD(node):
+	hud = node
+
+func getHUD():
+	return hud
 
 func _ready():
 	print("Starting: " + str(ProjectSettings.get_setting("application/config/name")) + " v" + getVersionString())

@@ -43,7 +43,7 @@ extents = Vector2( 3, 3 )
 script = ExtResource( 2 )
 
 [node name="Sprite" type="Sprite" parent="."]
-position = Vector2( 0, 2 )
+position = Vector2( 0, 1 )
 texture = ExtResource( 1 )
 centered = false
 hframes = 4
@@ -55,7 +55,7 @@ frame = 3
 ]]
 texture = ExtResource( 3 )
 offset = Vector2( 8, 8 )
-texture_scale = 0.05
+texture_scale = 0.1
 color = Color( 1, 0, 0, 1 )
 energy = 0.5
 

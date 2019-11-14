@@ -10,15 +10,19 @@ extends Control
 
 # Justify https://godotengine.org/qa/39374/godot-xyz-declared-but-never-used-the-script-how-store-vars-now
 
-enum GameStates {Menu, Game} 
 
-var state = GameStates.Menu
+
+var state = Types.GameStates.Menu
 
 var worldDigable = null
 var worldNormal = null
 var level = null
 
 var deadCount = 0
+var time = 0
+
+var indicator = Types.IndicatorLevel.Lite
+var lights = true
 
 onready var level0 = preload("res://src/Levels/Level0.tscn")
 
@@ -27,7 +31,15 @@ func _ready():
 	Global.setGameManager(self)
 	Global.debugLabel = $gameViewport/Viewport/Camera/Debug
 	
+	# Init HUD
+	Global.getHUD().init()
+	
+	stateTransition(Types.GameStates.Menu)
 	loadLevel()
+
+func _physics_process(delta):
+	if state == Types.GameStates.Game:
+		time += delta
 
 func setLevel(node):
 	level = node
@@ -62,11 +74,30 @@ func setWorlds(digable, normal):
 	worldNormal = normal
 
 func stateTransition(to):
-	if to == GameStates.Menu:
+	if to == Types.GameStates.Menu:
 		$gameViewport.hide()
 		$menuViewport.show()
-	elif to == GameStates.Game:
+		Global.getHUD().hide()
+	elif to == Types.GameStates.Game:
 		$gameViewport.show()
 		$menuViewport.hide()
+		Global.getHUD().show()
 	state = to
 
+func continueGame():
+	stateTransition(Types.GameStates.Game)
+	
+func newGame():
+	stateTransition(Types.GameStates.Game)
+
+func setLights(state):
+	lights = state
+
+func setIndicator(to):
+	indicator = to
+
+func getLights():
+	return lights
+
+func getIndicator():
+	return indicator

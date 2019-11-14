@@ -1,6 +1,8 @@
 extends Node
 
 enum Direction { Top, Right, Down, Left }
+enum GameStates {Menu, Game, Settings} 
+enum IndicatorLevel {Off, Lite, Full}
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
