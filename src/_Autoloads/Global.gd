@@ -35,6 +35,7 @@ var userConfig = {
 var gm = null
 var cam = null
 var hud = null
+var menu = null
 
 # Debug Label
 var debugLabel = null
@@ -55,6 +56,12 @@ func setGameManager(node):
 # GameManager Get
 func getGameManager():
 	return gm
+
+func setMenu(node):
+	menu = node
+
+func getMenu():
+	return menu
 
 func setHUD(node):
 	hud = node
@@ -87,6 +94,7 @@ func loadConfig():
 	cfgFile.open("user://config.cfg", File.READ)
 	var data = parse_json(cfgFile.get_line())
 	userConfig.highscore = data.highscore
+
 
 # Window Scaler
 func videoSetup(scale = 2):

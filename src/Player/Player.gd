@@ -20,7 +20,6 @@ const WALK_FORCE = 1600
 
 var state = PlayerStates.Normal
 var prevState = PlayerStates.Normal
-var active = true
 
 var lastDirection = Vector2(1,0)
 var raycastDirection = Vector2(1,0)
@@ -41,22 +40,29 @@ onready var trailNode = preload("res://src/Player/PlayerTrail.tscn")
 var stagePositionOffset = Vector2()
 var restartPoint = Vector2()
 
+var gm = null
+
 func _ready():
+	gm = Global.getGameManager()
+	
 	$Body.modulate =  Color( 1, 1, 1, 1 )
 	$Body.position = Vector2(0,0)
 	stagePositionOffset = get_parent().position
 	restartPoint = position
 	
+	# Slow down
 	var timeScale =  1
-	
 	Engine.set_time_scale(timeScale)
 	Engine.set_iterations_per_second(60*timeScale)
+	
+	var indicator = gm.getIndicator()
+	
 
 func _physics_process(delta):
 	
 	$Help.updateUI(hasJumped, dodgeAvailable)
 	
-	if active:
+	if gm.active:
 		updateAnimation()
 		var inputDirection: Vector2
 		inputDirection = getInputDirection()
@@ -71,7 +77,9 @@ func _physics_process(delta):
 	
 	if Input.is_action_just_pressed("ui_reset"):
 		reset()
-		
+	if Input.is_action_just_pressed("ui_menu"):
+		gm.active = false
+		gm.stateTransition(Types.GameStates.Menu)
 
 func reset():
 	Global.gm.reset()
@@ -80,6 +88,7 @@ func reset():
 	airTime = 0
 	$Body.position = Vector2(0,0)
 	$Body.modulate =  Color( 1, 1, 1, 1 )
+	gm.save()
 
 func transition(toNode):
 	if not isTransitioning:
@@ -175,7 +184,7 @@ func processNormal(delta, inputDirection):
 	updateDirection()
 
 func processDig(inputDirection):
-	if active:
+	if gm.active:
 		if Input.is_action_just_pressed('ui_dive'):
 			if $Dig/Area.get_overlapping_bodies().size() == 0:
 				if performDig($Dig/Area/Cursor.global_position):
@@ -319,9 +328,9 @@ func _on_Dodge_tween_completed(object, key):
 	stateTransition(PlayerStates.Normal)
 
 func kill():
-	active = false
+	gm.active = false
 	$AnimationPlayer.play("die")
-	Global.getGameManager().deadCount += 1
+	gm.deadCount += 1
 	
 func _on_Trail_timeout():
 	createTrail()
@@ -336,9 +345,10 @@ func isStateNormal():
 func _on_Transition_tween_completed(object, key):
 	isTransitioning = false
 	airTime = 0
+	gm.save()
 
 
 func _on_AnimationPlayer_animation_finished(anim_name):
 	if anim_name == "die":
 		reset()
-		active = true
+		gm.active = true

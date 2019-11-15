@@ -3,11 +3,17 @@ extends Control
 enum MenuState {Main, Settings}
 
 func _ready():
+	Global.setMenu(self)
 	$Version.bbcode_text = "[right]"+ Global.getVersionString() + "[/right]"
+
+func updateMenu(continueAvailable):
+	if continueAvailable:
+		$Main/ButtonContinue.show()
+	else:
+		$Main/ButtonContinue.hide()
 
 func _on_ButtonContinue_button_up():
 	Global.getGameManager().continueGame()
-
 
 func _on_ButtonPlay_button_up():
 	Global.getGameManager().newGame()

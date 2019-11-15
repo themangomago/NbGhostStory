@@ -137,7 +137,7 @@ position = Vector2( 80, 144 )
 [node name="Gate" parent="Objects" groups=[
 "level",
 ] instance=ExtResource( 13 )]
-position = Vector2( 336, 48 )
+position = Vector2( 608, 80 )
 
 [node name="testblob" parent="." instance=ExtResource( 19 )]
 position = Vector2( 137, 261 )

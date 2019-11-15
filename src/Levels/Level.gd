@@ -8,7 +8,6 @@ var player = null
 func _ready():
 	var gm = Global.getGameManager()
 	gm.setWorlds($WorldDigable, $WorldNormal)
-	gm.setLevel(self)
 	
 	spawnPlayer()
 

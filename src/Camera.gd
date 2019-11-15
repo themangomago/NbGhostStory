@@ -6,9 +6,7 @@ var state = CamStates.Static
 
 onready var tween = $Tween
 
-#warning-ignore:unused_argument
-func _physics_process(delta):
-	get_node("Debug").set_text(str(position))
+
 
 func _ready():
 	Global.setCam(self)
