@@ -1,0 +1,18 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://assets/art/deco/moon.png" type="Texture" id=1]
+[ext_resource path="res://assets/art/dummylight.png" type="Texture" id=2]
+
+[node name="Moon" type="Node2D"]
+
+[node name="Light2D" type="Light2D" parent="." groups=[
+"light",
+]]
+texture = ExtResource( 2 )
+offset = Vector2( 16, 16 )
+color = Color( 0.831373, 0.807843, 0.219608, 1 )
+energy = 0.8
+
+[node name="Sprite" type="Sprite" parent="."]
+texture = ExtResource( 1 )
+centered = false

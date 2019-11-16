@@ -39,7 +39,7 @@ var menu = null
 
 # Debug Label
 var debugLabel = null
-var debug = true
+var debug = false
 
 # RNG base
 var rng = RandomNumberGenerator.new()

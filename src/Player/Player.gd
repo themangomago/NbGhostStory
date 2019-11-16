@@ -82,6 +82,7 @@ func _physics_process(delta):
 		gm.stateTransition(Types.GameStates.Menu)
 
 func reset():
+	print("reset")
 	Global.gm.reset()
 	position = restartPoint
 	velocity = Vector2(0, 0)
@@ -91,6 +92,7 @@ func reset():
 	gm.save()
 
 func transition(toNode):
+	print("transition")
 	if not isTransitioning:
 		isTransitioning = true
 		#Cam Transition
@@ -114,7 +116,6 @@ func processNormal(delta, inputDirection):
 		onFloor = is_on_floor()
 		
 	#Global.debugLabel.set_text(str(onFloor) + " " + str(onPlatform))
-	
 
 	if onFloor:
 		if airTime > 38:
@@ -127,8 +128,6 @@ func processNormal(delta, inputDirection):
 	else:
 		airTime += 1
 	
-	
-
 	if Input.is_action_just_pressed('ui_jump') and not jumping and (onFloor or prevState != PlayerStates.Normal):
 		performJump()
 		velocity.y =- JUMP_FORCE
@@ -273,6 +272,7 @@ func performDodge():
 
 
 func performDig(target):
+	#print("dig")
 	var coords = Global.gm.getTilePosition(target)
 	var validity = Global.gm.getTileValidity(coords)
 
@@ -302,9 +302,11 @@ func performJump():
 
 func stateTransition(to):
 	if to == PlayerStates.Normal:
+		print("normal")
 		$Eyes.hide()
 		setCollision(true)
 	elif to == PlayerStates.Dig:
+		print("dig")
 		$Eyes.show()
 		setCollision(false)
 	prevState = state

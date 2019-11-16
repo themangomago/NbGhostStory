@@ -15,6 +15,7 @@ var completed = false
 
 var deadCount = 0
 var time = 0
+var apples = 0
 
 var indicator = Types.IndicatorLevel.Lite
 var lights = true
@@ -27,8 +28,6 @@ var saveAvailable = false
 
 const levels = [
 	"res://src/Levels/Tut1.tscn",
-	"res://src/Levels/Level0.tscn",
-	"res://src/Levels/Level1.tscn",
 	"res://src/Levels/LevelEnd.tscn",
 ]
 
@@ -61,7 +60,8 @@ func saveGame():
 	var save = {
 		"level": levelId,
 		"dead": deadCount,
-		"time": time
+		"time": time,
+		"apples": apples
 	}
 	var cfgFile = File.new()
 	cfgFile.open("user://save.cfg", File.WRITE)
@@ -77,6 +77,7 @@ func loadGame():
 		levelId = data.level
 		deadCount = data.dead
 		time = data.time
+		apples = data.apples
 		saveAvailable = true
 
 
@@ -154,6 +155,7 @@ func newGame():
 		unloadLevel()
 		deadCount = 0
 		time = 0
+		apples = 0
 	loadLevel(0)
 	stateTransition(Types.GameStates.Game)
 	active = true
