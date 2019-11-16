@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://src/GameManager.gd" type="Script" id=1]
 [ext_resource path="res://src/Camera.gd" type="Script" id=2]
@@ -6,8 +6,10 @@
 [ext_resource path="res://src/HUD.gd" type="Script" id=4]
 [ext_resource path="res://src/Menu/Menu.tscn" type="PackedScene" id=5]
 [ext_resource path="res://assets/fonts/mago3.3.ttf" type="DynamicFontData" id=6]
+[ext_resource path="res://assets/art/menu/nbSplash.png" type="Texture" id=7]
+[ext_resource path="res://assets/art/bg.png" type="Texture" id=8]
 
-[sub_resource type="Animation" id=3]
+[sub_resource type="Animation" id=1]
 resource_name = "levelFade"
 length = 0.5
 tracks/0/type = "value"
@@ -23,13 +25,12 @@ tracks/0/keys = {
 "values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
 }
 
-[sub_resource type="DynamicFont" id=1]
+[sub_resource type="DynamicFont" id=2]
 outline_size = 1
 outline_color = Color( 0.439216, 0.215686, 0.498039, 1 )
 font_data = ExtResource( 6 )
 
-[sub_resource type="Animation" id=2]
-resource_name = "save"
+[sub_resource type="Animation" id=3]
 length = 2.2
 tracks/0/type = "value"
 tracks/0/path = NodePath("Saving:self_modulate")
@@ -42,6 +43,22 @@ tracks/0/keys = {
 "transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1 ),
 "update": 0,
 "values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0.501961 ), Color( 1, 1, 1, 0.784314 ), Color( 1, 1, 1, 0.501961 ), Color( 1, 1, 1, 0.784314 ), Color( 1, 1, 1, 0 ) ]
+}
+
+[sub_resource type="Animation" id=4]
+resource_name = "start"
+length = 2.0
+tracks/0/type = "value"
+tracks/0/path = NodePath("TextureRect:self_modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1.3, 2 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
 }
 
 [node name="GameManager" type="Control"]
@@ -73,6 +90,7 @@ render_target_update_mode = 0
 audio_listener_enable_2d = true
 
 [node name="LevelHolder" type="Node2D" parent="gameViewport/Viewport"]
+z_index = 1
 
 [node name="LevelFade" type="ColorRect" parent="gameViewport/Viewport"]
 anchor_right = 1.0
@@ -80,7 +98,7 @@ anchor_bottom = 1.0
 color = Color( 0.121569, 0.054902, 0.109804, 1 )
 
 [node name="AnimationLevelFade" type="AnimationPlayer" parent="gameViewport/Viewport"]
-anims/levelFade = SubResource( 3 )
+anims/levelFade = SubResource( 1 )
 
 [node name="Camera" type="Camera2D" parent="gameViewport/Viewport"]
 anchor_mode = 0
@@ -88,6 +106,11 @@ current = true
 script = ExtResource( 2 )
 
 [node name="Tween" type="Tween" parent="gameViewport/Viewport/Camera"]
+
+[node name="Background" type="Sprite" parent="gameViewport/Viewport/Camera"]
+texture = ExtResource( 8 )
+centered = false
+offset = Vector2( -16, -16 )
 
 [node name="HUD" type="CanvasLayer" parent="gameViewport"]
 script = ExtResource( 4 )
@@ -128,7 +151,7 @@ anchor_right = 0.5
 margin_left = -48.0
 margin_right = 48.0
 margin_bottom = 14.0
-custom_fonts/font = SubResource( 1 )
+custom_fonts/font = SubResource( 2 )
 text = "¨ Saving"
 align = 1
 valign = 1
@@ -137,7 +160,7 @@ __meta__ = {
 }
 
 [node name="AnimationSave" type="AnimationPlayer" parent="gameViewport/HUD"]
-anims/save = SubResource( 2 )
+anims/save = SubResource( 3 )
 
 [node name="menuViewport" type="ViewportContainer" parent="."]
 anchor_right = 1.0
@@ -165,4 +188,22 @@ margin_bottom = 14.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="BootSplash" type="Control" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="TextureRect" type="TextureRect" parent="BootSplash"]
+self_modulate = Color( 1, 1, 1, 0 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+texture = ExtResource( 7 )
+expand = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="BootSplash"]
+autoplay = "start"
+anims/start = SubResource( 4 )
 [connection signal="tween_completed" from="gameViewport/Viewport/Camera/Tween" to="gameViewport/Viewport/Camera" method="_on_Tween_tween_completed"]

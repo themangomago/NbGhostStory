@@ -1,16 +1,9 @@
 extends Control
 
 #TODO:
-# - Light deactive/shadow deactive for enemy in get_tree().get_nodes_in_group("light)
-# - UI (Deadcount, Time, Apples)
-# - Menu
-# - Savegame
-
 # - Levels
 
 # Justify https://godotengine.org/qa/39374/godot-xyz-declared-but-never-used-the-script-how-store-vars-now
-
-
 
 var state = Types.GameStates.Menu
 
@@ -33,6 +26,7 @@ var active = false
 var saveAvailable = false
 
 const levels = [
+	"res://src/Levels/Tut1.tscn",
 	"res://src/Levels/Level0.tscn",
 	"res://src/Levels/Level1.tscn",
 	"res://src/Levels/LevelEnd.tscn",
