@@ -25,8 +25,8 @@ func tweenStart():
 	$Tween.interpolate_property(self, "position", position, tweenValues[1], SPEED_PER_TILE * tiles, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
 	$Tween.start()
 
-
-
+#warning-ignore:unused_argument
+#warning-ignore:unused_argument
 func _on_Tween_tween_completed(object, key):
 	tweenValues.invert()
 	tweenStart()

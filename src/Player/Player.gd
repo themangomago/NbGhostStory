@@ -59,7 +59,7 @@ func _ready():
 	
 
 func _physics_process(delta):
-	
+	OS.set_window_title( str(airTime) )
 	$Help.updateUI(hasJumped, dodgeAvailable)
 	
 	if gm.active:
@@ -118,7 +118,7 @@ func processNormal(delta, inputDirection):
 	#Global.debugLabel.set_text(str(onFloor) + " " + str(onPlatform))
 
 	if onFloor:
-		if airTime > 38:
+		if airTime > 20:
 			$Sounds/Landing.play()
 		elif airTime == 0:
 			dodgeAvailable = true
@@ -224,7 +224,16 @@ func updateAnimation():
 		if($AnimationPlayer.current_animation != anim):
 				$AnimationPlayer.play(anim)
 		
-
+func setHelpIndicator(level):
+	if level == Types.IndicatorLevel.Off:
+		$Dig/Area/Indicator.hide()
+		$Help.hide()
+	elif level == Types.IndicatorLevel.Lite:
+		$Dig/Area/Indicator.show()
+		$Help.hide()
+	else:
+		$Dig/Area/Indicator.show()
+		$Help.show()
 
 func getInputDirection():
 	var input = Vector2(0, 0)
@@ -302,11 +311,9 @@ func performJump():
 
 func stateTransition(to):
 	if to == PlayerStates.Normal:
-		print("normal")
 		$Eyes.hide()
 		setCollision(true)
 	elif to == PlayerStates.Dig:
-		print("dig")
 		$Eyes.show()
 		setCollision(false)
 	prevState = state
@@ -332,6 +339,7 @@ func _on_Dodge_tween_completed(object, key):
 func kill():
 	gm.active = false
 	$AnimationPlayer.play("die")
+	$Sounds/Dead.play()
 	gm.deadCount += 1
 	
 func _on_Trail_timeout():

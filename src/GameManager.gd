@@ -45,6 +45,9 @@ func _ready():
 	
 	stateTransition(Types.GameStates.Menu)
 
+
+
+
 func _physics_process(delta):
 	Global.debugLabel.set_text(str(state))
 	if state == Types.GameStates.Game and not completed:
@@ -80,6 +83,14 @@ func loadGame():
 		apples = data.apples
 		saveAvailable = true
 
+func _input(event):
+   # Mouse in viewport coordinates
+   if event is InputEventMouseButton:
+	   print(str(event))
+
+func updateHelpIndicator():
+	for player in get_tree().get_nodes_in_group("player"):
+		player.setHelpIndicator(indicator)
 
 func updateLights():
 	for light in get_tree().get_nodes_in_group("light"):
@@ -111,6 +122,7 @@ func stateTransition(to):
 	if to == Types.GameStates.Menu:
 		$gameViewport.hide()
 		$menuViewport.show()
+		$menuViewport/Viewport/Menu.show()
 		if levelNode or saveAvailable:
 			Global.menu.updateMenu(true)
 		else:
@@ -119,8 +131,10 @@ func stateTransition(to):
 	elif to == Types.GameStates.Game:
 		$gameViewport.show()
 		$menuViewport.hide()
+		$menuViewport/Viewport/Menu.hide()
 		Global.getHUD().show()
 		updateLights()
+		updateHelpIndicator()
 	state = to
 
 func loadLevel(number = 0):
@@ -174,3 +188,13 @@ func getIndicator():
 
 func save():
 	Global.hud.save()
+
+
+func _on_Button3_button_up():
+	print("no")
+
+
+func _on_Button_button_up():
+	if Global.getGameManager().state == Types.GameStates.Menu:
+		Global.getGameManager().newGame()
+

@@ -39,11 +39,13 @@ var menu = null
 
 # Debug Label
 var debugLabel = null
-var debug = false
+var debug = true
 
 # RNG base
 var rng = RandomNumberGenerator.new()
 var stateSeed = int(3458764513820540928)
+
+var upscale = 2
 
 ###############################################################################
 # Functions
@@ -74,7 +76,7 @@ func _ready():
 	rng.randomize()
 	loadConfig()
 	videoSetup(2)
-	
+
 
 
 # Config Save
@@ -104,6 +106,7 @@ func videoSetup(scale = 2):
 	var centered_pos = (screen_size - window_size) / 2
 	OS.set_window_position(centered_pos)
 	OS.set_window_size(window_size)
+	upscale = scale
 
 # Fullscreen Toggle
 func fullscreen():

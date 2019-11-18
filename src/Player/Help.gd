@@ -1,6 +1,8 @@
 extends Sprite
 
 
+
+
 func updateUI(hasJumped, dodgeAvailable):
 	if not hasJumped and dodgeAvailable:
 		self.frame = 0

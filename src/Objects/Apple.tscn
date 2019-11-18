@@ -66,4 +66,4 @@ anims/idle = SubResource( 1 )
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area"]
 position = Vector2( 8, 8 )
 shape = SubResource( 2 )
-[connection signal="body_entered" from="Area" to="." method="_on_Area_body_entered"]
+[connection signal="body_entered" from="Area" to="." method="_on_Area_body_entered" flags=3]
