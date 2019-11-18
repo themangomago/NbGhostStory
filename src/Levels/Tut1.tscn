@@ -78,6 +78,7 @@ position = Vector2( 64, 192 )
 
 [node name="spawnT1" parent="Objects/Stage1" instance=ExtResource( 6 )]
 position = Vector2( 448, 176 )
+spawnName = "STAGE1"
 
 [node name="Transition" parent="Objects/Stage1" instance=ExtResource( 7 )]
 position = Vector2( 464, 128 )
@@ -93,7 +94,7 @@ transitionTo = NodePath("../../Stage1/spawnT1")
 
 [node name="spawnT2" parent="Objects/Stage2" instance=ExtResource( 6 )]
 position = Vector2( 512, 176 )
-spawnName = "STAGE1"
+spawnName = "STAGE2"
 
 [node name="FallingBlock" parent="Objects/Stage2" instance=ExtResource( 12 )]
 position = Vector2( 656, 192 )
@@ -131,7 +132,7 @@ transitionTo = NodePath("../../Stage3/spawnT3")
 
 [node name="spawnT2-2" parent="Objects/Stage2" instance=ExtResource( 6 )]
 position = Vector2( 928, 160 )
-spawnName = "STAGE1"
+spawnName = "STAGE2"
 
 [node name="Torch" parent="Objects/Stage2" instance=ExtResource( 16 )]
 position = Vector2( 528, 144 )
@@ -143,11 +144,11 @@ position = Vector2( 832, 144 )
 
 [node name="spawnT3" parent="Objects/Stage3" instance=ExtResource( 6 )]
 position = Vector2( 992, 176 )
-spawnName = "STAGE1"
+spawnName = "STAGE3"
 
 [node name="spawnT3-2" parent="Objects/Stage3" instance=ExtResource( 6 )]
 position = Vector2( 1408, 176 )
-spawnName = "STAGE1"
+spawnName = "STAGE3"
 
 [node name="Apple2" parent="Objects/Stage3" instance=ExtResource( 8 )]
 position = Vector2( 1008, 32 )
@@ -200,7 +201,7 @@ transitionTo = NodePath("../../Stage3/spawnT3-2")
 
 [node name="spawnT4" parent="Objects/Stage4" instance=ExtResource( 6 )]
 position = Vector2( 1472, 176 )
-spawnName = "STAGE1"
+spawnName = "STAGE4"
 
 [node name="Apple3" parent="Objects/Stage4" instance=ExtResource( 8 )]
 position = Vector2( 1840, 128 )
