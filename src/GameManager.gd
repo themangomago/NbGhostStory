@@ -1,9 +1,6 @@
 extends Control
 
-#TODO:
-# - Levels
 
-# Justify https://godotengine.org/qa/39374/godot-xyz-declared-but-never-used-the-script-how-store-vars-now
 
 var state = Types.GameStates.Menu
 
@@ -16,9 +13,6 @@ var completed = false
 var deadCount = 0
 var time = 0
 var apples = 0
-
-var indicator = Types.IndicatorLevel.Lite
-var lights = true
 
 var nextLevelFlag = false
 
@@ -90,11 +84,11 @@ func _input(event):
 
 func updateHelpIndicator():
 	for player in get_tree().get_nodes_in_group("player"):
-		player.setHelpIndicator(indicator)
+		player.setHelpIndicator(Global.userConfig.indicator)
 
 func updateLights():
 	for light in get_tree().get_nodes_in_group("light"):
-		light.enabled = lights
+		light.enabled = Global.userConfig.lights
 
 func reset():
 	for node in get_tree().get_nodes_in_group("resetState"):
@@ -175,23 +169,21 @@ func newGame():
 	active = true
 
 func setLights(state):
-	lights = state
+	Global.userConfig.lights = state
+	Global.saveConfig()
 
 func setIndicator(to):
-	indicator = to
+	Global.userConfig.indicator = to
+	Global.saveConfig()
 
 func getLights():
-	return lights
+	return Global.userConfig.lights
 
 func getIndicator():
-	return indicator
+	return Global.userConfig.indicator
 
 func save():
 	Global.hud.save()
-
-
-func _on_Button3_button_up():
-	print("no")
 
 
 func _on_Button_button_up():

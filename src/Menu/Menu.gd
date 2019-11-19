@@ -59,6 +59,11 @@ func updateSettings():
 		$Settings/ButtonIndicator/Text.bbcode_text = "[center]Indicator: Lite[/center]"
 	else:
 		$Settings/ButtonIndicator/Text.bbcode_text = "[center]Indicator: Full[/center]"
+	
+	if Global.userConfig.fullscreen:
+		$Settings/ButtonFullscreen/Text.bbcode_text = "[center]Fullscreen: On[/center]"
+	else:
+		$Settings/ButtonFullscreen/Text.bbcode_text = "[center]Fullscreen: Off[/center]"
 
 func _on_ButtonBack_button_up():
 	stateTransition(MenuState.Main)
@@ -83,3 +88,9 @@ func _on_ButtonIndicator_button_up():
 
 func _on_ButtonControls_button_up():
 	stateTransition(MenuState.Controls)
+
+
+func _on_ButtonFullscreen_button_up():
+	Global.fullscreen()
+	updateSettings()
+	

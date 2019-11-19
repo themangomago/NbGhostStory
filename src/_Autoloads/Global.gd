@@ -28,7 +28,10 @@ const NbConfig = {
 
 # User Config
 var userConfig = {
-	"highscore": 0
+	"highscore": 0,
+	"fullscreen": false,
+	"indicator": Types.IndicatorLevel.Lite,
+	"lights": true
 }
 
 # GameMasterNode
@@ -75,7 +78,8 @@ func _ready():
 	print("Starting: " + str(ProjectSettings.get_setting("application/config/name")) + " v" + getVersionString())
 	rng.randomize()
 	loadConfig()
-	videoSetup(2)
+	videoSetup(1)
+	fullscreen(userConfig.fullscreen)
 
 
 
@@ -96,6 +100,9 @@ func loadConfig():
 	cfgFile.open("user://config.cfg", File.READ)
 	var data = parse_json(cfgFile.get_line())
 	userConfig.highscore = data.highscore
+	userConfig.fullscreen = data.fullscreen
+	userConfig.indicator = data.indicator
+	userConfig.lights = data.lights
 
 
 # Window Scaler
@@ -109,8 +116,12 @@ func videoSetup(scale = 2):
 	upscale = scale
 
 # Fullscreen Toggle
-func fullscreen():
-	if OS.window_fullscreen:
+func fullscreen(set = null):
+	if set == null:
+		userConfig.fullscreen = !userConfig.fullscreen
+		saveConfig()
+		
+	if not userConfig.fullscreen:
 		OS.window_fullscreen = false
 		videoSetup(2)
 	else:

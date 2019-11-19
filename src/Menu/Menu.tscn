@@ -30,6 +30,15 @@ __meta__ = {
 texture = ExtResource( 1 )
 centered = false
 
+[node name="ColorRect" type="ColorRect" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+color = Color( 0.00392157, 0.00392157, 0.00392157, 0.0627451 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
 [node name="Main" type="Control" parent="."]
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -279,6 +288,36 @@ __meta__ = {
 "_edit_lock_": true
 }
 
+[node name="ButtonFullscreen" type="TextureButton" parent="Settings"]
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -64.0
+margin_top = 96.0
+margin_right = 64.0
+margin_bottom = 120.0
+texture_normal = ExtResource( 2 )
+texture_pressed = ExtResource( 4 )
+texture_hover = ExtResource( 3 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Text" type="RichTextLabel" parent="Settings/ButtonFullscreen"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 16.0
+margin_top = 4.0
+margin_right = -16.0
+margin_bottom = -4.0
+mouse_filter = 1
+custom_fonts/normal_font = SubResource( 1 )
+bbcode_enabled = true
+bbcode_text = "[center]Fullscreen: Off[/center]"
+text = "Fullscreen: Off"
+__meta__ = {
+"_edit_lock_": true
+}
+
 [node name="Controls" type="Control" parent="."]
 visible = false
 anchor_right = 1.0
@@ -353,4 +392,5 @@ __meta__ = {
 [connection signal="button_up" from="Settings/ButtonBack" to="." method="_on_ButtonBack_button_up"]
 [connection signal="button_up" from="Settings/ButtonLights" to="." method="_on_ButtonLights_button_up"]
 [connection signal="button_up" from="Settings/ButtonIndicator" to="." method="_on_ButtonIndicator_button_up"]
+[connection signal="button_up" from="Settings/ButtonFullscreen" to="." method="_on_ButtonFullscreen_button_up"]
 [connection signal="button_up" from="Controls/ButtonBack" to="." method="_on_ButtonBack_button_up"]

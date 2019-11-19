@@ -39,6 +39,7 @@ var isOnTreadMill = false
 var isTransitioning = false
 
 onready var trailNode = preload("res://src/Player/PlayerTrail.tscn")
+onready var dustNode = preload("res://src/Player/Dust.tscn")
 
 var stagePositionOffset = Vector2()
 var restartPoint = Vector2()
@@ -64,7 +65,7 @@ func _ready():
 func _physics_process(delta):
 	OS.set_window_title( str(airTime) )
 	$Help.updateUI(hasJumped, dodgeAvailable)
-	
+	$Label.set_text($AnimationPlayer.current_animation)
 	if gm.active:
 		updateAnimation()
 		var inputDirection: Vector2
@@ -123,6 +124,8 @@ func processNormal(delta, inputDirection):
 	if onFloor:
 		if airTime > 20:
 			$Sounds/Landing.play()
+			dustLanding()
+			airTime = 0
 		elif airTime == 0:
 			dodgeAvailable = true
 		jumping = false
@@ -133,6 +136,7 @@ func processNormal(delta, inputDirection):
 	
 	if Input.is_action_just_pressed('ui_jump') and not jumping and (onFloor or prevState != PlayerStates.Normal):
 		performJump()
+		dustJumping()
 		velocity.y =- JUMP_FORCE
 		jumping = true
 		hasJumped = true
@@ -340,6 +344,22 @@ func _on_Dodge_tween_completed(object, key):
 		jumping = true
 	$Timers/Trail.stop()
 	stateTransition(PlayerStates.Normal)
+
+func dustLanding():
+	spawnDust(1)
+
+func dustJumping():
+	spawnDust(2)
+
+func spawnDust(id):
+	var dust = dustNode.instance()
+	dust.position = self.position - Vector2(0, 11)
+	get_parent().add_child(dust)
+	if id == 1:
+		dust.playLanding()
+	else:
+		dust.playJumping()
+
 
 func kill():
 	gm.active = false
