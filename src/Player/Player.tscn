@@ -27,7 +27,6 @@ extents = Vector2( 0.6, 0.6 )
 
 [sub_resource type="Animation" id=4]
 resource_name = "die"
-length = 2.0
 tracks/0/type = "value"
 tracks/0/path = NodePath("Body:frame")
 tracks/0/interp = 1
@@ -35,31 +34,19 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
 "update": 1,
-"values": [ 9 ]
+"values": [ 9, 10, 11, 12, 13 ]
 }
 tracks/1/type = "value"
-tracks/1/path = NodePath("Body:position")
+tracks/1/path = NodePath("Body:modulate")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 0, 0.1, 0.4, 1.2 ),
-"transitions": PoolRealArray( 1, 1, 1, 1 ),
-"update": 0,
-"values": [ Vector2( 0, 0 ), Vector2( 0, -8 ), Vector2( 0, -8 ), Vector2( 0, 128 ) ]
-}
-tracks/2/type = "value"
-tracks/2/path = NodePath("Body:modulate")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/keys = {
-"times": PoolRealArray( 0, 1, 1.2 ),
+"times": PoolRealArray( 0, 0.3, 0.6 ),
 "transitions": PoolRealArray( 1, 1, 1 ),
 "update": 0,
 "values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
@@ -212,13 +199,13 @@ script = ExtResource( 3 )
 
 [node name="Eyes" type="Sprite" parent="."]
 visible = false
-position = Vector2( 0, -1 )
 texture = ExtResource( 2 )
 
 [node name="Body" type="Sprite" parent="."]
 texture = ExtResource( 1 )
 offset = Vector2( 0, -2 )
 hframes = 14
+frame = 9
 
 [node name="Help" type="Sprite" parent="." groups=[
 "help",
@@ -314,7 +301,7 @@ bus = "Sounds"
 [node name="Timers" type="Node2D" parent="."]
 
 [node name="Trail" type="Timer" parent="Timers"]
-wait_time = 0.05
+wait_time = 0.04
 
 [node name="Label" type="Label" parent="."]
 visible = false
