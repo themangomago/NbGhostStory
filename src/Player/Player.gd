@@ -4,6 +4,7 @@ extends KinematicBody2D
 enum PlayerStates {Normal, Dig, Dodge, Dead}
 
 const DEFAULT_GRAVITY = Vector2(0, 10)
+const TREADMILL_SPEED = 25
 const MAX_JUMP_POWER = 2.5
 const MAX_AIR_TIME = 5
 const MAX_SPEED = 120
@@ -24,6 +25,7 @@ var prevState = PlayerStates.Normal
 var lastDirection = Vector2(1,0)
 var raycastDirection = Vector2(1,0)
 var velocity = Vector2(0,0)
+var externalVelocity = Vector2(0,0)
 var airTime = 0
 var anim = ""
 var digged = false
@@ -33,6 +35,7 @@ var jumping = false
 var hasJumped = false
 var onPlatform = false
 var isOnJumpPad = false
+var isOnTreadMill = false
 var isTransitioning = false
 
 onready var trailNode = preload("res://src/Player/PlayerTrail.tscn")
@@ -206,9 +209,11 @@ func setCollision(pstate):
 func updateDirection():
 	if lastDirection.x == -1:
 		$Body.flip_h = true
+		$Eyes.flip_h = true
 		$Dig.rotation = -PI
 	elif lastDirection.x == 1:
 		$Body.flip_h = false
+		$Eyes.flip_h = false
 		$Dig.rotation = 0
 
 func updateAnimation():

@@ -135,7 +135,7 @@ tracks/1/keys = {
 "times": PoolRealArray( 0, 0.4 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 1,
-"values": [ Vector2( 0, -1 ), Vector2( 0, 0 ) ]
+"values": [ Vector2( 0, 0 ), Vector2( 0, 1 ) ]
 }
 
 [sub_resource type="Animation" id=8]
@@ -217,15 +217,14 @@ texture = ExtResource( 2 )
 
 [node name="Body" type="Sprite" parent="."]
 texture = ExtResource( 1 )
-offset = Vector2( 0, -1 )
-hframes = 10
-frame = 9
+offset = Vector2( 0, -2 )
+hframes = 14
 
 [node name="Help" type="Sprite" parent="." groups=[
 "help",
 ]]
 material = SubResource( 1 )
-position = Vector2( 0, -11 )
+position = Vector2( 0, -12 )
 scale = Vector2( 0.5, 0.5 )
 texture = ExtResource( 13 )
 hframes = 4
