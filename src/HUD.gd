@@ -25,11 +25,8 @@ func _physics_process(delta):
 		var gm = Global.getGameManager()
 		var time = gm.time
 		
-		#TODO: overflow 
-		var minutes = "%02d" % [time / 60]
-		var seconds = "%02d" % [int(time) % 60]
-		var ms = "%03d" % [int(time*1000) % 1000]
+		var timeString = Global.timeToString(time)
 		
-		$Time.set_text("¦ " +  minutes + ":" + seconds + ":"+ ms)
+		$Time.set_text("¦ " +  timeString)
 		
 		$Dead.set_text("€ " + str(gm.deadCount))

@@ -11,21 +11,34 @@ func updateMenu(continueAvailable):
 		$Main/ButtonContinue.show()
 	else:
 		$Main/ButtonContinue.hide()
+		
+	if Global.userConfig.highscore.time > 0:
+		updateHighscore()
+		$Main/Highscore.show()
+	else:
+		$Main/Highscore.hide()
+
+func updateHighscore():
+	$Main/Highscore.bbcode_text = "Highscore\n¦ " + Global.timeToString(Global.userConfig.highscore.time) + "\n€ "+ str(Global.userConfig.highscore.dead) +"\n ~ "+ str(Global.userConfig.highscore.apples) +"\n"
 
 func _on_ButtonContinue_button_up():
 	if Global.getGameManager().state == Types.GameStates.Menu:
 		Global.getGameManager().continueGame()
+		$Click.play()
 
 func _on_ButtonPlay_button_up():
 	if Global.getGameManager().state == Types.GameStates.Menu:
 		Global.getGameManager().newGame()
+		$Click.play()
 
 func _on_ButtonSettings_button_up():
 	if Global.getGameManager().state == Types.GameStates.Menu:
 		stateTransition(MenuState.Settings)
+		$Click.play()
 
 func _on_ButtonExit_button_up():
 	if Global.getGameManager().state == Types.GameStates.Menu:
+		$Click.play()
 		print("Ok, Bye! Thanks for playing.")
 		get_tree().quit()
 
@@ -67,12 +80,14 @@ func updateSettings():
 
 func _on_ButtonBack_button_up():
 	stateTransition(MenuState.Main)
+	$Click.play()
 
 
 func _on_ButtonLights_button_up():
 	var lights = Global.getGameManager().getLights()
 	Global.getGameManager().setLights(!lights)
 	updateSettings()
+	$Click.play()
 
 
 func _on_ButtonIndicator_button_up():
@@ -84,13 +99,16 @@ func _on_ButtonIndicator_button_up():
 	else:
 		Global.getGameManager().setIndicator(Types.IndicatorLevel.Off)
 	updateSettings()
+	$Click.play()
 
 
 func _on_ButtonControls_button_up():
 	stateTransition(MenuState.Controls)
+	$Click.play()
 
 
 func _on_ButtonFullscreen_button_up():
 	Global.fullscreen()
 	updateSettings()
+	$Click.play()
 	

@@ -49,6 +49,12 @@ var gm = null
 func _ready():
 	gm = Global.getGameManager()
 	
+	if gm.continueSaveGame:
+		gm.continueSaveGame = false
+		position = gm.spawn
+		Global.getCam().switchToScreen(position)
+	
+	
 	$Body.modulate =  Color( 1, 1, 1, 1 )
 	$Body.position = Vector2(0,0)
 	stagePositionOffset = get_parent().position
@@ -60,7 +66,15 @@ func _ready():
 	Engine.set_iterations_per_second(60*timeScale)
 	
 	var indicator = gm.getIndicator()
-	
+	DebugSetup()
+
+func DebugSetup():
+	if Global.debug:
+		var debugCat = Debug.addCategory("PlayerInfo")
+		Debug.addOption(debugCat, "Position" , funcref(self, "DebugGetPosition"), null)
+
+func DebugGetPosition(to):
+	print(position)
 
 func _physics_process(delta):
 	OS.set_window_title( str(airTime) )
@@ -93,19 +107,14 @@ func reset():
 	airTime = 0
 	$Body.position = Vector2(0,0)
 	$Body.modulate =  Color( 1, 1, 1, 1 )
-	gm.save()
+	gm.save(restartPoint)
 
 func transition(toNode):
 	print("transition")
 	if not isTransitioning:
 		isTransitioning = true
 		#Cam Transition
-		var pos = (toNode.position / Vector2(480, 272))
-		if pos.y < 0: pos.y -= 1
-		if pos.x < 0: pos.x -= 1
-		pos = Vector2(int(pos.x), int(pos.y))
-		Global.getCam().transitionToScreen(pos)
-		print("Trans to " + str(pos))
+		Global.getCam().transitionToScreen(toNode.position)
 		#Move Player To Target
 		$Tweens/Transition.interpolate_property(self, "position", position, toNode.position, 0.3, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
 		$Tweens/Transition.start()
@@ -380,7 +389,7 @@ func isStateNormal():
 func _on_Transition_tween_completed(object, key):
 	isTransitioning = false
 	airTime = 0
-	gm.save()
+	gm.save(restartPoint)
 
 
 func _on_AnimationPlayer_animation_finished(anim_name):

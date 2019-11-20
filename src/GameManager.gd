@@ -13,21 +13,21 @@ var completed = false
 var deadCount = 0
 var time = 0
 var apples = 0
+var spawn = Vector2(0, 0) #Only required for save game loading
 
 var nextLevelFlag = false
 
 # Game Active
 var active = false
 var saveAvailable = false
+var continueSaveGame = false
 
 const levels = [
 	"res://src/Levels/Tut1.tscn",
 	"res://src/Levels/LevelEnd.tscn",
 ]
 
-
 func _ready():
-	print("gm")
 	Global.setGameManager(self)
 	Global.debugLabel = $Debug
 	
@@ -53,12 +53,14 @@ func _physics_process(delta):
 
 
 # Save Game
-func saveGame():
+func saveGame(spawn):
 	var save = {
 		"level": levelId,
 		"dead": deadCount,
 		"time": time,
-		"apples": apples
+		"apples": apples,
+		"spawnx": spawn.x,
+		"spawny": spawn.y
 	}
 	var cfgFile = File.new()
 	cfgFile.open("user://save.cfg", File.WRITE)
@@ -69,12 +71,13 @@ func saveGame():
 func loadGame():
 	var cfgFile = File.new()
 	if  cfgFile.file_exists("user://save.cfg"):
-		cfgFile.open("user://config.cfg", File.READ)
+		cfgFile.open("user://save.cfg", File.READ)
 		var data = parse_json(cfgFile.get_line())
 		levelId = data.level
 		deadCount = data.dead
 		time = data.time
 		apples = data.apples
+		spawn = Vector2(data.spawnx, data.spawny)
 		saveAvailable = true
 
 func _input(event):
@@ -146,6 +149,7 @@ func nextLevel():
 	levelId += 1
 	unloadLevel()
 	loadLevel(levelId)
+	$gameViewport/Viewport/Camera.reset()
 	
 	if levelId < levels.size() - 1:
 		Global.hud.save()
@@ -154,7 +158,8 @@ func nextLevel():
 
 func continueGame():
 	if not levelNode:
-		print("load level from save")
+		continueSaveGame = true
+		loadLevel(levelId)
 	stateTransition(Types.GameStates.Game)
 	active = true
 	
@@ -164,7 +169,10 @@ func newGame():
 		deadCount = 0
 		time = 0
 		apples = 0
+		levelId = 0
+		completed = false
 	loadLevel(0)
+	$gameViewport/Viewport/Camera.reset()
 	stateTransition(Types.GameStates.Game)
 	active = true
 
@@ -182,8 +190,9 @@ func getLights():
 func getIndicator():
 	return Global.userConfig.indicator
 
-func save():
+func save(spawn):
 	Global.hud.save()
+	saveGame(spawn)
 
 
 func _on_Button_button_up():

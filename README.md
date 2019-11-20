@@ -4,11 +4,11 @@
 
 - [x] Controller Help Y Key
 - [x] Landing Dust Animation
-- [ ] Level Finish Screen
-- [ ] Highscore Display
-- [ ] Bug: New Game Reset Camera
+- [x] Level Finish Screen
+- [x] Highscore Display
+- [x] Bug: New Game Reset Camera
 
-- [ ] Save Game / Continue Game
+- [x] Save Game / Continue Game
 - [ ] Menu Sound
 - [ ] Music
 - [ ] At least 5 more levels

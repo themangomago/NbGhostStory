@@ -7,36 +7,39 @@ var state = CamStates.Static
 onready var tween = $Tween
 
 
-
 func _ready():
 	Global.setCam(self)
+	DebugSetup()
+
+func DebugSetup():
+	if Global.debug:
+		var debugCat = Debug.addCategory("CamInfo")
+		Debug.addOption(debugCat, "Position" , funcref(self, "DebugGetPosition"), null)
+
+func DebugGetPosition(to):
+	print(position)
+
+func switchToScreen(to):
+	var pos = (to / Vector2(480, 272))
+	if pos.y < 0: pos.y -= 1
+	if pos.x < 0: pos.x -= 1
+	pos = Vector2(int(pos.x), int(pos.y))
+	position = pos * Vector2(480, 272)
+	print(position)
 
 func transitionToScreen(to):
-	var end = to * Vector2(480, 272)
+	var pos = (to / Vector2(480, 272))
+	if pos.y < 0: pos.y -= 1
+	if pos.x < 0: pos.x -= 1
+	pos = Vector2(int(pos.x), int(pos.y))
+	var end = pos * Vector2(480, 272)
 	tween.interpolate_property(self, 'position', self.position, end, 2, Tween.TRANS_QUINT, Tween.EASE_OUT)
 	tween.start()
 	state = CamStates.Transition
 
-
-#func transition(direction):
-#	# # 480x270  | 12	
-#	if state == CamStates.Static:
-#		var end = position
-#		match direction:
-#			Types.Direction.Right:
-#				end += Vector2(480, 0)
-#			Types.Direction.Left:
-#				end -= Vector2(480, 0)
-#			Types.Direction.Top:
-#				end -= Vector2(0, 272)
-#			Types.Direction.Down:
-#				end += Vector2(0, 272)
-#
-#		tween.interpolate_property(self, 'position', self.position, end, 3, Tween.TRANS_QUINT, Tween.EASE_OUT)
-#		tween.start()
-#		state = CamStates.Transition
-#		return true
-#	return false
+func reset():
+	print("reset")
+	position = Vector2(0, 0)
 
 #warning-ignore:unused_argument
 #warning-ignore:unused_argument

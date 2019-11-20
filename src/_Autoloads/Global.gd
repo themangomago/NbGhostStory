@@ -28,7 +28,11 @@ const NbConfig = {
 
 # User Config
 var userConfig = {
-	"highscore": 0,
+	"highscore": {
+		"dead": 0,
+		"time": 0,
+		"apples": 0
+	},
 	"fullscreen": false,
 	"indicator": Types.IndicatorLevel.Lite,
 	"lights": true
@@ -105,6 +109,7 @@ func loadConfig():
 	userConfig.lights = data.lights
 
 
+
 # Window Scaler
 func videoSetup(scale = 2):
 	var initSize = Vector2(ProjectSettings.get_setting("display/window/size/width"), ProjectSettings.get_setting("display/window/size/height"))
@@ -160,3 +165,8 @@ func getDebug():
 		return debugLabel
 	return null
 
+func timeToString(time):
+	var minutes = "%02d" % [time / 60]
+	var seconds = "%02d" % [int(time) % 60]
+	var ms = "%03d" % [int(time*1000) % 1000]
+	return str("" + minutes + ":" + seconds + ":"+ ms)

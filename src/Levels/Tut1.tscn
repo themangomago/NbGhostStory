@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=2]
+[gd_scene load_steps=22 format=2]
 
 [ext_resource path="res://assets/art/bgLeveledit.png" type="Texture" id=1]
 [ext_resource path="res://src/Decorations/Moon.tscn" type="PackedScene" id=2]
@@ -20,6 +20,7 @@
 [ext_resource path="res://src/Objects/Gate.tscn" type="PackedScene" id=18]
 [ext_resource path="res://src/Objects/Platform.tscn" type="PackedScene" id=19]
 [ext_resource path="res://src/tilesetBg.tres" type="TileSet" id=20]
+[ext_resource path="res://src/Objects/Guide.tscn" type="PackedScene" id=21]
 
 [node name="Level" type="Node2D"]
 script = ExtResource( 5 )
@@ -252,3 +253,8 @@ text = "You can move thru walls with the 'dig' key"
 [node name="Sign2" parent="Decoration" instance=ExtResource( 11 )]
 position = Vector2( 1072, 176 )
 text = "Use 'dash' for long jumps"
+
+[node name="Guide" parent="Decoration" instance=ExtResource( 21 )]
+position = Vector2( 832, 160 )
+text = "[center]WAAH! .. It worked? Are you Oddly? Follow the path![/center]"
+suprise = true

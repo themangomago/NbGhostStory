@@ -307,7 +307,7 @@ __meta__ = {
 ]]
 texture = ExtResource( 12 )
 texture_scale = 0.4
-energy = 0.6
+energy = 0.5
 shadow_item_cull_mask = 2
 [connection signal="tween_completed" from="Tweens/Dodge" to="." method="_on_Dodge_tween_completed"]
 [connection signal="tween_completed" from="Tweens/Transition" to="." method="_on_Transition_tween_completed"]
