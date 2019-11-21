@@ -75,10 +75,10 @@ __meta__ = {
 position = Vector2( 432, 16 )
 
 [node name="spawnStart" parent="Objects/Stage1" instance=ExtResource( 6 )]
-position = Vector2( 64, 192 )
+position = Vector2( 64, 200 )
 
 [node name="spawnT1" parent="Objects/Stage1" instance=ExtResource( 6 )]
-position = Vector2( 448, 176 )
+position = Vector2( 448, 184 )
 spawnName = "STAGE1"
 
 [node name="Transition" parent="Objects/Stage1" instance=ExtResource( 7 )]
@@ -94,7 +94,7 @@ scale = Vector2( 0.978518, 4.02837 )
 transitionTo = NodePath("../../Stage1/spawnT1")
 
 [node name="spawnT2" parent="Objects/Stage2" instance=ExtResource( 6 )]
-position = Vector2( 512, 176 )
+position = Vector2( 512, 184 )
 spawnName = "STAGE2"
 
 [node name="FallingBlock" parent="Objects/Stage2" instance=ExtResource( 12 )]
@@ -132,7 +132,7 @@ scale = Vector2( 1.01138, 3.90047 )
 transitionTo = NodePath("../../Stage3/spawnT3")
 
 [node name="spawnT2-2" parent="Objects/Stage2" instance=ExtResource( 6 )]
-position = Vector2( 928, 160 )
+position = Vector2( 928, 168 )
 spawnName = "STAGE2"
 
 [node name="Torch" parent="Objects/Stage2" instance=ExtResource( 16 )]
@@ -144,11 +144,11 @@ position = Vector2( 832, 144 )
 [node name="Stage3" type="Node2D" parent="Objects"]
 
 [node name="spawnT3" parent="Objects/Stage3" instance=ExtResource( 6 )]
-position = Vector2( 992, 176 )
+position = Vector2( 992, 184 )
 spawnName = "STAGE3"
 
 [node name="spawnT3-2" parent="Objects/Stage3" instance=ExtResource( 6 )]
-position = Vector2( 1408, 176 )
+position = Vector2( 1407, 184 )
 spawnName = "STAGE3"
 
 [node name="Apple2" parent="Objects/Stage3" instance=ExtResource( 8 )]
@@ -201,7 +201,7 @@ scale = Vector2( 0.99093, 3.89162 )
 transitionTo = NodePath("../../Stage3/spawnT3-2")
 
 [node name="spawnT4" parent="Objects/Stage4" instance=ExtResource( 6 )]
-position = Vector2( 1472, 176 )
+position = Vector2( 1472, 184 )
 spawnName = "STAGE4"
 
 [node name="Apple3" parent="Objects/Stage4" instance=ExtResource( 8 )]

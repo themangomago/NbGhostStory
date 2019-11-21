@@ -9,7 +9,7 @@
 - [x] Bug: New Game Reset Camera
 
 - [x] Save Game / Continue Game
-- [ ] Menu Sound
+- [x] Menu Sound
 - [ ] Music
 - [ ] At least 5 more levels
 

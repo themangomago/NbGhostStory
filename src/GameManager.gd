@@ -166,11 +166,11 @@ func continueGame():
 func newGame():
 	if levelNode:
 		unloadLevel()
-		deadCount = 0
-		time = 0
-		apples = 0
-		levelId = 0
-		completed = false
+	deadCount = 0
+	time = 0
+	apples = 0
+	levelId = 0
+	completed = false
 	loadLevel(0)
 	$gameViewport/Viewport/Camera.reset()
 	stateTransition(Types.GameStates.Game)
