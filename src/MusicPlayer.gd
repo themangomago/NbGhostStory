@@ -42,10 +42,6 @@ func playMusic(thisStage):
 	self.play()
 
 func _on_MusicPlayer_finished():
-	print("MPlayer")
-	print(introFinished)
-	print(stage)
-	
 	if introFinished == false:
 		introFinished = true
 		self.set_stream(musicTable[stage].loop)

@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=2]
+[gd_scene load_steps=24 format=2]
 
 [ext_resource path="res://assets/art/bgLeveledit.png" type="Texture" id=1]
 [ext_resource path="res://src/Decorations/Moon.tscn" type="PackedScene" id=2]
@@ -21,6 +21,8 @@
 [ext_resource path="res://src/Objects/Platform.tscn" type="PackedScene" id=19]
 [ext_resource path="res://src/tilesetBg.tres" type="TileSet" id=20]
 [ext_resource path="res://src/Objects/Guide.tscn" type="PackedScene" id=21]
+[ext_resource path="res://src/Objects/Spikeball.tscn" type="PackedScene" id=22]
+[ext_resource path="res://src/Objects/LightningRod.tscn" type="PackedScene" id=23]
 
 [node name="Level" type="Node2D"]
 script = ExtResource( 5 )
@@ -85,6 +87,14 @@ spawnName = "STAGE1"
 position = Vector2( 464, 128 )
 scale = Vector2( 1, 4.0328 )
 transitionTo = NodePath("../../Stage2/spawnT2")
+
+[node name="Spikeball" parent="Objects/Stage1" instance=ExtResource( 22 )]
+position = Vector2( 320, 32 )
+length = 6
+
+[node name="LightningRod" parent="Objects/Stage1" instance=ExtResource( 23 )]
+position = Vector2( 256, 128 )
+tiles = 6
 
 [node name="Stage2" type="Node2D" parent="Objects"]
 
@@ -238,7 +248,7 @@ __meta__ = {
 }
 
 [node name="Moon" parent="Decoration" instance=ExtResource( 2 )]
-position = Vector2( 144, 16 )
+position = Vector2( 112, 16 )
 
 [node name="Grave" parent="Decoration" instance=ExtResource( 9 )]
 position = Vector2( 80, 176 )

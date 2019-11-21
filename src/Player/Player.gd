@@ -77,7 +77,6 @@ func DebugGetPosition(to):
 	print(position)
 
 func _physics_process(delta):
-	OS.set_window_title( str(airTime) )
 	$Help.updateUI(hasJumped, dodgeAvailable)
 	$Label.set_text($AnimationPlayer.current_animation)
 	if gm.active:
@@ -344,6 +343,9 @@ func setDig(pstate):
 	else:
 		$Light2D.show()
 	digged = pstate
+
+func getDig():
+	return digged
 
 #warning-ignore:unused_argument
 #warning-ignore:unused_argument

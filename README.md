@@ -10,7 +10,7 @@
 
 - [x] Save Game / Continue Game
 - [x] Menu Sound
-- [ ] Music
+- [x] Music
 - [ ] At least 5 more levels
 
 - [ ] Readme

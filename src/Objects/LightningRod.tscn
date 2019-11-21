@@ -1,0 +1,46 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://assets/art/objects/lightningconnector.png" type="Texture" id=1]
+[ext_resource path="res://src/Objects/LightningRod.gd" type="Script" id=2]
+[ext_resource path="res://assets/art/objects/lightning1.png" type="Texture" id=3]
+[ext_resource path="res://assets/art/objects/lightning2.png" type="Texture" id=4]
+
+[sub_resource type="SpriteFrames" id=1]
+animations = [ {
+"frames": [ ExtResource( 3 ), ExtResource( 4 ) ],
+"loop": true,
+"name": "default",
+"speed": 8.0
+} ]
+
+[sub_resource type="RectangleShape2D" id=2]
+
+[node name="LightningRod" type="Node2D"]
+script = ExtResource( 2 )
+
+[node name="Top" type="Sprite" parent="."]
+z_index = 5
+texture = ExtResource( 1 )
+centered = false
+
+[node name="Bottom" type="Sprite" parent="."]
+position = Vector2( 0, 32 )
+z_index = 5
+texture = ExtResource( 1 )
+centered = false
+flip_v = true
+
+[node name="Reference" type="AnimatedSprite" parent="."]
+visible = false
+frames = SubResource( 1 )
+frame = 1
+
+[node name="Tween" type="Tween" parent="."]
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2( 0, 16 )
+shape = SubResource( 2 )
+[connection signal="tween_completed" from="Tween" to="." method="_on_Tween_tween_completed"]
+[connection signal="body_entered" from="Area2D" to="." method="_on_Area2D_body_entered" flags=3]
