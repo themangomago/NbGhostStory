@@ -1,9 +1,9 @@
 extends Node2D
 
-const SPEED_PER_TILE = 0.5
 
 export(int) var heigth = 4 #y
 export(int) var tiles = 5 #x
+export(float) var speed = 0.5
 export(Types.Direction) var direction = Types.Direction.Left
 
 
@@ -42,7 +42,7 @@ func _ready():
 
 
 func runTween():
-	$Tween.interpolate_property(self, "position", position, tweenValues[1], SPEED_PER_TILE * tiles, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
+	$Tween.interpolate_property(self, "position", position, tweenValues[1], speed * tiles, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
 	$Tween.start()
 
 

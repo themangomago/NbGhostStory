@@ -26,9 +26,9 @@ func DebugPortPlayer(to):
 	assert(player != null)
 	for spawn in get_tree().get_nodes_in_group("spawn"):
 		if spawn.name == to:
-			print(spawn.position)
-			player.position = spawn.position
-			player.restartPoint = spawn.position
+			print(spawn.get_global_position())
+			player.position = spawn.get_global_position()
+			player.restartPoint = spawn.get_global_position()
 			# var pos = (player.position / Vector2(480, 272))
 			# if pos.y < 0: pos.y -= 1
 			# if pos.x < 0: pos.x -= 1

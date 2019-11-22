@@ -2,6 +2,7 @@ extends Node
 
 var menuOpen = false
 var subMenu = 0 
+var zeroPressed = false
 
 var data = []
 var options = []
@@ -36,8 +37,15 @@ func _displaySubMenu(index):
 	print("----------------")
 
 func _handleOptions(code):
+	if code == KEY_0 and not zeroPressed:
+		zeroPressed = true
+		return
 	if code >= KEY_0 and code <= KEY_9:
 		var index = code - KEY_0
+		if zeroPressed:
+			index += 10
+			zeroPressed = false
+		
 		print(">"+str(index))
 		if subMenu == 0:
 			for category in data:

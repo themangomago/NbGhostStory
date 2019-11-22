@@ -111,11 +111,11 @@ func transition(toNode):
 	if not isTransitioning:
 		isTransitioning = true
 		#Cam Transition
-		Global.getCam().transitionToScreen(toNode.position)
+		Global.getCam().transitionToScreen(toNode.get_global_position())
 		#Move Player To Target
-		$Tweens/Transition.interpolate_property(self, "position", position, toNode.position, 0.3, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
+		$Tweens/Transition.interpolate_property(self, "position", position, toNode.get_global_position(), 0.3, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
 		$Tweens/Transition.start()
-		restartPoint = toNode.position
+		restartPoint = toNode.get_global_position()
 
 func processNormal(delta, inputDirection):
 	var onFloor
