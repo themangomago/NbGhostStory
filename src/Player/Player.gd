@@ -99,7 +99,6 @@ func _physics_process(delta):
 		gm.stateTransition(Types.GameStates.Menu)
 
 func reset():
-	print("reset")
 	Global.gm.reset()
 	position = restartPoint
 	velocity = Vector2(0, 0)
@@ -109,7 +108,6 @@ func reset():
 	gm.save(restartPoint)
 
 func transition(toNode):
-	print("transition")
 	if not isTransitioning:
 		isTransitioning = true
 		#Cam Transition

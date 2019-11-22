@@ -21,7 +21,8 @@ var AudioStream
 
 func _ready():
 	DebugSetup()
-	playMusic(0)
+	if not Global.debug:
+		playMusic(0)
 
 func DebugSetup():
 	if Global.debug:

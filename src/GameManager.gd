@@ -23,6 +23,7 @@ var saveAvailable = false
 var continueSaveGame = false
 
 const levels = [
+	"res://src/Levels/Level1.tscn",
 	"res://src/Levels/Tut1.tscn",
 	"res://src/Levels/LevelEnd.tscn",
 ]
