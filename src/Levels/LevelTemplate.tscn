@@ -64,7 +64,7 @@ spawnName = "STAGE1"
 [node name="Transition" parent="Objects/Stage1" instance=ExtResource( 7 )]
 position = Vector2( 464, 128 )
 scale = Vector2( 1, 4.0328 )
-transitionTo = NodePath("../../../../Level1/Objects/Stage2/spawnT2")
+transitionTo = NodePath("../../Stage2/spawnT2")
 
 [node name="GateDeco" parent="Objects/Stage1" instance=ExtResource( 2 )]
 position = Vector2( 16, 176 )
@@ -90,12 +90,12 @@ position = Vector2( 176, 80 )
 [node name="Transition2" parent="Objects/Stage2" instance=ExtResource( 7 )]
 position = Vector2( -3.05176e-005, 128 )
 scale = Vector2( 0.978518, 4.02837 )
-transitionTo = NodePath("../../../../Level1/Objects/Stage1/spawnT1")
+transitionTo = NodePath("../../Stage1/spawnT1")
 
 [node name="Transition3" parent="Objects/Stage2" instance=ExtResource( 7 )]
 position = Vector2( 464, 128 )
 scale = Vector2( 1.01138, 3.90047 )
-transitionTo = NodePath("../../../../Level1/Objects/Stage3/spawnT3")
+transitionTo = NodePath("../../Stage3/spawnT3")
 
 [node name="Stage3" type="Node2D" parent="Objects"]
 position = Vector2( 960, 0 )

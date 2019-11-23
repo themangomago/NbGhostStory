@@ -210,12 +210,12 @@ position = Vector2( 337, 184 )
 [node name="Transition2" parent="Objects/Stage2" instance=ExtResource( 7 )]
 position = Vector2( -3.05176e-005, 224 )
 scale = Vector2( 1, 2 )
-transitionTo = NodePath("../../../../Level1/Objects/Stage1/spawnT1")
+transitionTo = NodePath("../../Stage1/spawnT1")
 
 [node name="Transition3" parent="Objects/Stage2" instance=ExtResource( 7 )]
 position = Vector2( 464, 96 )
 scale = Vector2( 1, 4 )
-transitionTo = NodePath("../../../../Level1/Objects/Stage3/spawnT3")
+transitionTo = NodePath("../../Stage3/spawnT3")
 
 [node name="Spikeball" parent="Objects/Stage2" instance=ExtResource( 11 )]
 position = Vector2( 96, 96 )
