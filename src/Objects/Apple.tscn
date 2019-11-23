@@ -37,7 +37,9 @@ tracks/1/keys = {
 [sub_resource type="RectangleShape2D" id=2]
 extents = Vector2( 3, 3 )
 
-[node name="Apple" type="Node2D"]
+[node name="Apple" type="Node2D" groups=[
+"resetState",
+]]
 script = ExtResource( 2 )
 
 [node name="Sprite" type="Sprite" parent="."]

@@ -22,8 +22,8 @@
 - [ ] Tents
 
 ### Levels
-- [ ] L1
-- [ ] L2
+- [x] L1
+- [x] L2
 - [x] L3
 - [ ] L4
 - [ ] L5
@@ -34,7 +34,8 @@
 - [ ] L9
 - [ ] EndScene
 
-
+- [ ] Level 2 indicator auf full?!
+- [ ] Bruzel Sound für Lightning
 - [ ] New Title Heading
 - [ ] Music to Level
 - [ ] Readme

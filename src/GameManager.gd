@@ -13,6 +13,7 @@ var completed = false
 var deadCount = 0
 var time = 0
 var apples = 0
+var applesUnsave = 0
 var spawn = Vector2(0, 0) #Only required for save game loading
 
 var nextLevelFlag = false
@@ -23,8 +24,10 @@ var saveAvailable = false
 var continueSaveGame = false
 
 const levels = [
-	"res://src/Levels/Level1.tscn",
 	"res://src/Levels/Tut1.tscn",
+	"res://src/Levels/Level1.tscn",
+	"res://src/Levels/Level2.tscn",
+	"res://src/Levels/Level3.tscn",
 	"res://src/Levels/LevelEnd.tscn",
 ]
 
@@ -140,6 +143,7 @@ func loadLevel(number = 0):
 	$gameViewport.get_node("Viewport/LevelHolder").add_child(levelNode)
 	updateLights()
 	$gameViewport/Viewport/AnimationLevelFade.play("levelFade")
+	updateHelpIndicator()
 
 func unloadLevel():
 	$gameViewport.get_node("Viewport/LevelHolder").remove_child(levelNode)

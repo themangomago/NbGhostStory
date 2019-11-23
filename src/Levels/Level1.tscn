@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=2]
+[gd_scene load_steps=21 format=2]
 
 [ext_resource path="res://assets/art/bgLeveledit.png" type="Texture" id=1]
 [ext_resource path="res://src/Decorations/GateDeco.tscn" type="PackedScene" id=2]
@@ -11,6 +11,8 @@
 [ext_resource path="res://src/Objects/Jumppad.tscn" type="PackedScene" id=9]
 [ext_resource path="res://src/Objects/StaticPlatform.tscn" type="PackedScene" id=10]
 [ext_resource path="res://src/Objects/Spikeball.tscn" type="PackedScene" id=11]
+[ext_resource path="res://src/Objects/LavaLight.tscn" type="PackedScene" id=12]
+[ext_resource path="res://src/Objects/Torch.tscn" type="PackedScene" id=13]
 [ext_resource path="res://src/Objects/Spike.tscn" type="PackedScene" id=15]
 [ext_resource path="res://src/Objects/Dead.tscn" type="PackedScene" id=16]
 [ext_resource path="res://src/Objects/Crystal.tscn" type="PackedScene" id=17]
@@ -23,21 +25,25 @@
 script = ExtResource( 5 )
 
 [node name="LevelDebug" type="Sprite" parent="."]
+visible = false
 position = Vector2( 960, 0 )
 texture = ExtResource( 1 )
 centered = false
 
 [node name="LevelDebug2" type="Sprite" parent="."]
+visible = false
 position = Vector2( 960, 272 )
 texture = ExtResource( 1 )
 centered = false
 
 [node name="LevelDebug3" type="Sprite" parent="."]
+visible = false
 position = Vector2( 1440, 272 )
 texture = ExtResource( 1 )
 centered = false
 
 [node name="LevelDebug4" type="Sprite" parent="."]
+visible = false
 position = Vector2( 1440, 0 )
 texture = ExtResource( 1 )
 centered = false
@@ -73,7 +79,7 @@ cell_size = Vector2( 16, 16 )
 collision_layer = 2
 collision_mask = 2
 format = 1
-tile_data = PoolIntArray( 262145, 2, 0, 262146, 1, 0, 262147, 1, 0, 262148, 1, 0, 262149, 1, 0, 262150, 1, 0, 262151, 1, 0, 262152, 1, 0, 262153, 2, 0, 262165, 6, 0, 262171, 6, 0, 458793, 11, 0, 524309, 2, 0, 524315, 2, 0, 524320, 11, 0, 524328, 11, 0, 524329, 11, 0, 589864, 0, 0, 655400, 3, 0, 655415, 2, 0, 655445, 0, 0, 655456, 0, 0, 655457, 1, 0, 655458, 0, 0, 720936, 0, 0, 720981, -1610612735, 0, 786453, 2, 0, 786459, 2, 0, 786517, -1610612735, 0, 851976, 0, 0, 852053, -1610612735, 0, 917542, 11, 0, 917589, -1610612735, 0, 983078, 11, 0, 983079, 11, 0, 983125, 0, 0, 1048597, 2, 0, 1048603, 2, 0, 1048604, 9, 0, 1048605, 10, 0, 1048649, 8, 0, 1048650, 8, 0, 1048651, 8, 0, 1048652, 8, 0, 1048653, 8, 0, 1048654, 8, 0, 1048655, 8, 0, 1048656, 8, 0, 1048657, 8, 0, 1048658, 8, 0, 1048659, 8, 0, 1048660, 8, 0, 1048661, 8, 0, 1048662, 8, 0, 1048663, 8, 0, 1048664, 8, 0, 1048665, 8, 0, 1048666, 8, 0, 1048667, 8, 0, 1048668, 8, 0, 1048669, 8, 0, 1048670, 8, 0, 1048671, 8, 0, 1114179, 0, 0, 1114182, 0, 0, 1114186, 7, 0, 1114187, 7, 0, 1114188, 7, 0, 1114189, 7, 0, 1114190, 7, 0, 1114191, 7, 0, 1114192, 7, 0, 1114193, 7, 0, 1114194, 7, 0, 1114195, 7, 0, 1114196, 7, 0, 1114197, 7, 0, 1114198, 7, 0, 1114199, 7, 0, 1114200, 7, 0, 1114201, 7, 0, 1114202, 7, 0, 1179715, -1610612735, 0, 1179719, 0, 0, 1179727, 7, 0, 1179728, 7, 0, 1179729, 7, 0, 1179730, 7, 0, 1179733, 7, 0, 1179734, 7, 0, 1179735, 7, 0, 1179736, 7, 0, 1179737, 7, 0, 1245251, 0, 0, 1245256, 0, 0, 1638480, 11, 0 )
+tile_data = PoolIntArray( -130973, 13, 0, 65550, 15, 0, 65569, 14, 0, 65577, 15, 0, 65619, 14, 0, 65622, 15, 0, 131098, 15, 0, 131169, 15, 0, 131189, 15, 0, 196636, 12, 0, 196662, 14, 0, 196675, 15, 0, 196698, 11, 0, 196700, 12, 0, 262145, 2, 0, 262146, 1, 0, 262147, 1, 0, 262148, 1, 0, 262149, 1, 0, 262150, 1, 0, 262151, 1, 0, 262152, 1, 0, 262153, 2, 0, 262165, 6, 0, 262171, 6, 0, 262246, 15, 0, 327686, 14, 0, 327722, 12, 0, 327732, 19, 0, 327759, 15, 0, 393216, 18, 0, 393281, 18, 0, 393305, 18, 0, 458793, 11, 0, 458857, 11, 0, 524294, 19, 0, 524309, 2, 0, 524315, 2, 0, 524320, 11, 0, 524325, 19, 0, 524328, 11, 0, 524329, 11, 0, 524333, 18, 0, 524338, 18, 0, 524389, 19, 0, 589857, 12, 0, 589864, 0, 0, 589872, 12, 0, 589880, 12, 0, 589906, 19, 0, 655384, 19, 0, 655400, 3, 0, 655415, 2, 0, 655423, 11, 0, 655424, 12, 0, 655445, 0, 0, 655456, 0, 0, 655457, 1, 0, 655458, 0, 0, 655473, 14, 0, 720927, 18, 0, 720936, 0, 0, 720981, -1610612735, 0, 720994, 14, 0, 721005, 18, 0, 786437, 12, 0, 786439, 12, 0, 786444, 12, 0, 786453, 2, 0, 786459, 2, 0, 786517, -1610612735, 0, 786526, 18, 0, 851976, 0, 0, 851986, 19, 0, 852002, 15, 0, 852053, -1610612735, 0, 917508, 18, 0, 917542, 11, 0, 917547, 18, 0, 917568, 18, 0, 917583, 18, 0, 917589, -1610612735, 0, 983076, 12, 0, 983078, 11, 0, 983079, 11, 0, 983125, 0, 0, 1048597, 2, 0, 1048603, 2, 0, 1048604, 9, 0, 1048605, 10, 0, 1048649, 8, 0, 1048650, 8, 0, 1048651, 8, 0, 1048652, 8, 0, 1048653, 8, 0, 1048654, 8, 0, 1048655, 8, 0, 1048656, 8, 0, 1048657, 8, 0, 1048658, 8, 0, 1048659, 8, 0, 1048660, 8, 0, 1048661, 8, 0, 1048662, 8, 0, 1048663, 8, 0, 1048664, 8, 0, 1048665, 8, 0, 1048666, 8, 0, 1048667, 8, 0, 1048668, 8, 0, 1048669, 8, 0, 1048670, 8, 0, 1048671, 8, 0, 1114179, 0, 0, 1114182, 0, 0, 1114186, 7, 0, 1114187, 7, 0, 1114188, 7, 0, 1114189, 7, 0, 1114190, 7, 0, 1114191, 7, 0, 1114192, 7, 0, 1114193, 7, 0, 1114194, 7, 0, 1114195, 7, 0, 1114196, 7, 0, 1114197, 7, 0, 1114198, 7, 0, 1114199, 7, 0, 1114200, 7, 0, 1114201, 7, 0, 1114202, 7, 0, 1179715, -1610612735, 0, 1179719, 0, 0, 1179727, 7, 0, 1179728, 7, 0, 1179729, 7, 0, 1179730, 7, 0, 1179733, 7, 0, 1179734, 7, 0, 1179735, 7, 0, 1179736, 7, 0, 1179737, 7, 0, 1245246, 18, 0, 1245251, 0, 0, 1245256, 0, 0, 1245289, 15, 0, 1310792, 14, 0, 1441873, 15, 0, 1507394, 15, 0, 1507425, 14, 0, 1507437, 18, 0, 1572936, 12, 0, 1572940, 12, 0, 1638480, 11, 0, 1638483, 12, 0, 1638496, 12, 0, 1638500, 18, 0, 1704034, 11, 0, 1704036, 12, 0, 1769581, 13, 0, 1835072, 13, 0, 1835090, 18, 0, 1835105, 18, 0, 1835119, 15, 0, 2031710, 15, 0 )
 __meta__ = {
 "_edit_lock_": true
 }
@@ -181,6 +187,9 @@ direction = 3
 position = Vector2( 144, 266 )
 scale = Vector2( 20, 1 )
 
+[node name="Torch" parent="Objects/Stage1" instance=ExtResource( 13 )]
+position = Vector2( 128, 176 )
+
 [node name="Stage2" type="Node2D" parent="Objects"]
 position = Vector2( 480, 0 )
 
@@ -245,6 +254,9 @@ direction = 0
 position = Vector2( 384, 208 )
 direction = 0
 
+[node name="Torch" parent="Objects/Stage2" instance=ExtResource( 13 )]
+position = Vector2( 224, 32 )
+
 [node name="Stage3" type="Node2D" parent="Objects"]
 position = Vector2( 960, 0 )
 
@@ -280,6 +292,14 @@ direction = 0
 
 [node name="GateExit" parent="Objects/Stage3" instance=ExtResource( 18 )]
 position = Vector2( 416, 32 )
+
+[node name="Dead" parent="Objects/Stage3" instance=ExtResource( 16 )]
+position = Vector2( 208, 262 )
+scale = Vector2( 23, 1 )
+
+[node name="LavaLight" parent="Objects/Stage3" instance=ExtResource( 12 )]
+position = Vector2( 400, 272 )
+scale = Vector2( 6, 1 )
 
 [node name="Stage4" type="Node2D" parent="Objects"]
 position = Vector2( 960, 272 )
@@ -365,7 +385,7 @@ direction = 0
 position = Vector2( 1440, 0 )
 
 [node name="spawnT6" parent="Objects/Stage6" instance=ExtResource( 6 )]
-position = Vector2( 208, 240 )
+position = Vector2( 191, 245 )
 spawnName = "STAGE6"
 
 [node name="Apple" parent="Objects/Stage6" instance=ExtResource( 8 )]
@@ -404,6 +424,9 @@ direction = 0
 [node name="Spikeball" parent="Objects/Stage6" instance=ExtResource( 11 )]
 position = Vector2( 112, 96 )
 length = 3
+
+[node name="Torch" parent="Objects/Stage6" instance=ExtResource( 13 )]
+position = Vector2( 160, 192 )
 
 [node name="Decoration" type="Node2D" parent="."]
 __meta__ = {

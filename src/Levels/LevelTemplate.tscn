@@ -14,11 +14,6 @@
 [node name="Level1" type="Node2D"]
 script = ExtResource( 5 )
 
-[node name="LevelDebug" type="Sprite" parent="."]
-position = Vector2( 480, 0 )
-texture = ExtResource( 1 )
-centered = false
-
 [node name="WorldBG" type="TileMap" parent="."]
 self_modulate = Color( 1, 1, 1, 0.12549 )
 light_mask = 4
@@ -77,6 +72,10 @@ position = Vector2( 16, 176 )
 [node name="Stage2" type="Node2D" parent="Objects"]
 position = Vector2( 480, 0 )
 
+[node name="LevelDebug" type="Sprite" parent="Objects/Stage2"]
+texture = ExtResource( 1 )
+centered = false
+
 [node name="spawnT2" parent="Objects/Stage2" instance=ExtResource( 6 )]
 position = Vector2( 64, 128 )
 spawnName = "STAGE2"
@@ -101,6 +100,10 @@ transitionTo = NodePath("../../../../Level1/Objects/Stage3/spawnT3")
 [node name="Stage3" type="Node2D" parent="Objects"]
 position = Vector2( 960, 0 )
 
+[node name="LevelDebug2" type="Sprite" parent="Objects/Stage3"]
+texture = ExtResource( 1 )
+centered = false
+
 [node name="spawnT3" parent="Objects/Stage3" instance=ExtResource( 6 )]
 position = Vector2( 64, 128 )
 spawnName = "STAGE3"
@@ -124,6 +127,10 @@ transitionTo = NodePath("../../Stage4/spawnT4")
 
 [node name="Stage4" type="Node2D" parent="Objects"]
 position = Vector2( 1440, 0 )
+
+[node name="LevelDebug3" type="Sprite" parent="Objects/Stage4"]
+texture = ExtResource( 1 )
+centered = false
 
 [node name="spawnT4" parent="Objects/Stage4" instance=ExtResource( 6 )]
 position = Vector2( 64, 128 )

@@ -8,6 +8,7 @@ var player = null
 var debugCat
 
 func _ready():
+	print("Level: " + str(name))
 	var gm = Global.getGameManager()
 	gm.setWorlds($WorldDigable, $WorldNormal)
 	
@@ -18,6 +19,8 @@ func _ready():
 func DebugSetup():
 	if Global.debug:
 		debugCat = Debug.addCategory("SpawnAt")
+		print("cat: " + str(debugCat))
+		Debug.clearOptions(debugCat)
 		for spawn in get_tree().get_nodes_in_group("spawn"):
 			#addOption(category, optionName, callback, parameter):
 			Debug.addOption(debugCat, str(spawn.name + " (" + spawn.spawnName  + ")" ), funcref(self, "DebugPortPlayer"), str(spawn.name))

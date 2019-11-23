@@ -71,7 +71,7 @@ func _ready():
 func addCategory(categoryName):
 	for i in range(data.size()):
 		if data[i].name == categoryName:
-			return i
+			return i + 1
 			
 	var index = data.size() + 1 
 	data.append({"index": index, "name": categoryName, "options": []})
@@ -83,6 +83,7 @@ func addOption(category, optionName, callback, parameter):
 
 func clearOptions(category):
 	data[category - 1].options.clear()
+	print(data[category - 1])
 
 func test(value):
 	print("-> Selected Value: " + str(value) )

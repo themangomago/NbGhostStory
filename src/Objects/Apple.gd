@@ -19,7 +19,7 @@ func _on_Area_body_entered(body):
 		var new = pickupNode.instance()
 		new.position = position
 		get_parent().add_child(new)
-		var apples = Global.getGameManager().apples 
-		Global.getGameManager().apples = apples + 1
+		var apples = Global.getGameManager().applesUnsave 
+		Global.getGameManager().applesUnsave = apples + 1
 		remove()
 		

@@ -53,12 +53,15 @@ func _ready():
 		gm.continueSaveGame = false
 		position = gm.spawn
 		Global.getCam().switchToScreen(position)
+	else:
+		Global.getCam().reset()
 	
 	
 	$Body.modulate =  Color( 1, 1, 1, 1 )
 	$Body.position = Vector2(0,0)
 	stagePositionOffset = get_parent().position
 	restartPoint = position
+	gm.save(restartPoint)
 	
 	# Slow down
 	var timeScale =  1
@@ -103,6 +106,8 @@ func reset():
 	position = restartPoint
 	velocity = Vector2(0, 0)
 	airTime = 0
+	dodgeAvailable = true
+	gm.applesUnsave = 0
 	$Body.position = Vector2(0,0)
 	$Body.modulate =  Color( 1, 1, 1, 1 )
 	gm.save(restartPoint)
@@ -116,6 +121,10 @@ func transition(toNode):
 		$Tweens/Transition.interpolate_property(self, "position", position, toNode.get_global_position(), 0.3, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
 		$Tweens/Transition.start()
 		restartPoint = toNode.get_global_position()
+		
+		gm.apples += gm.applesUnsave
+		gm.applesUnsave = 0
+		
 
 func processNormal(delta, inputDirection):
 	var onFloor
@@ -371,6 +380,7 @@ func spawnDust(id):
 
 
 func kill():
+	return
 	gm.active = false
 	$AnimationPlayer.play("die")
 	$Sounds/Dead.play()

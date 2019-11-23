@@ -84,7 +84,7 @@ spawnName = "STAGE1"
 [node name="Transition" parent="Objects/Stage1" instance=ExtResource( 7 )]
 position = Vector2( 464, -16 )
 scale = Vector2( 1, 4.0328 )
-transitionTo = NodePath("../../../../Level1/Objects/Stage2/spawnT2")
+transitionTo = NodePath("../../Stage2/spawnT2")
 
 [node name="GateDeco" parent="Objects/Stage1" instance=ExtResource( 2 )]
 position = Vector2( 16, 176 )
@@ -125,7 +125,7 @@ position = Vector2( 512, 40 )
 spawnName = "STAGE2"
 
 [node name="spawnT2-2" parent="Objects/Stage2" instance=ExtResource( 6 )]
-position = Vector2( 852, 28 )
+position = Vector2( 870, -30 )
 spawnName = "STAGE2"
 
 [node name="Apple" parent="Objects/Stage2" instance=ExtResource( 8 )]
@@ -134,12 +134,12 @@ position = Vector2( 496, 176 )
 [node name="Transition2" parent="Objects/Stage2" instance=ExtResource( 7 )]
 position = Vector2( 480, -16 )
 scale = Vector2( 0.978518, 4.02837 )
-transitionTo = NodePath("../../../../Level1/Objects/Stage1/spawnT1")
+transitionTo = NodePath("../../Stage1/spawnT1")
 
 [node name="Transition3" parent="Objects/Stage2" instance=ExtResource( 7 )]
 position = Vector2( 848, 0 )
 scale = Vector2( 3, 1 )
-transitionTo = NodePath("../../../../Level1/Objects/Stage3/spawnT3")
+transitionTo = NodePath("../spawnT2-2")
 
 [node name="FallingBlock" parent="Objects/Stage2" instance=ExtResource( 12 )]
 position = Vector2( 528, 224 )
@@ -329,25 +329,25 @@ position = Vector2( 592, 64 )
 [node name="Stage3" type="Node2D" parent="Objects"]
 
 [node name="spawnT3" parent="Objects/Stage3" instance=ExtResource( 6 )]
-position = Vector2( 599, -90 )
+position = Vector2( 600, -90 )
 spawnName = "STAGE3"
 
 [node name="spawnT3-2" parent="Objects/Stage3" instance=ExtResource( 6 )]
-position = Vector2( 832, -262 )
+position = Vector2( 837, -263 )
 spawnName = "STAGE3"
 
 [node name="Apple2" parent="Objects/Stage3" instance=ExtResource( 8 )]
 position = Vector2( 528, -432 )
 
-[node name="Transition4" parent="Objects/Stage3" instance=ExtResource( 7 )]
-position = Vector2( 848, -8 )
-scale = Vector2( 3, 0.5 )
-transitionTo = NodePath("../../../../Level1/Objects/Stage2/spawnT2-2")
-
 [node name="Transition5" parent="Objects/Stage3" instance=ExtResource( 7 )]
 position = Vector2( 544, -272 )
 scale = Vector2( 3, 1 )
-transitionTo = NodePath("../../../../Level1/Objects/Stage4/spawnT4")
+transitionTo = NodePath("../../Stage4/spawnT4")
+
+[node name="Transition6" parent="Objects/Stage3" instance=ExtResource( 7 )]
+position = Vector2( 570, -80 )
+scale = Vector2( 3, 1 )
+transitionTo = NodePath("../spawnT3")
 
 [node name="StaticPlatform" parent="Objects/Stage3" instance=ExtResource( 10 )]
 position = Vector2( 848, -16 )
@@ -435,7 +435,7 @@ __meta__ = {
 [node name="Transition6" parent="Objects/Stage4" instance=ExtResource( 7 )]
 position = Vector2( 816, -288 )
 scale = Vector2( 3, 1 )
-transitionTo = NodePath("../../../../Level1/Objects/Stage3/spawnT3-2")
+transitionTo = NodePath("../../Stage3/spawnT3-2")
 
 [node name="spawnT4" parent="Objects/Stage4" instance=ExtResource( 6 )]
 position = Vector2( 567, -298 )
@@ -551,7 +551,7 @@ position = Vector2( 784, 96 )
 position = Vector2( 592, -160 )
 
 [node name="Torch4" parent="Decoration" instance=ExtResource( 14 )]
-position = Vector2( 768, -384 )
+position = Vector2( 760, -390 )
 
 [node name="Torch5" parent="Decoration" instance=ExtResource( 14 )]
 position = Vector2( 784, -128 )
