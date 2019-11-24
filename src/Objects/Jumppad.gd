@@ -8,6 +8,7 @@ func _on_Area_body_entered(body):
 			body.isOnJumpPad = true
 			triggerd = true
 			$AnimationPlayer.play("jump")
+			$AudioStreamPlayer2D.play()
 			
 
 #warning-ignore:unused_argument

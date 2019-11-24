@@ -411,7 +411,7 @@ __meta__ = {
 
 [node name="Click" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 8 )
-volume_db = -4.0
+volume_db = -14.0
 bus = "Sounds"
 [connection signal="button_up" from="Main/ButtonExit" to="." method="_on_ButtonExit_button_up"]
 [connection signal="button_up" from="Main/ButtonSettings" to="." method="_on_ButtonSettings_button_up"]

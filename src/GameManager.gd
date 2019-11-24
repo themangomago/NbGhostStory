@@ -15,6 +15,7 @@ var time = 0
 var apples = 0
 var applesUnsave = 0
 var spawn = Vector2(0, 0) #Only required for save game loading
+var hasKey = false
 
 var nextLevelFlag = false
 
@@ -23,11 +24,14 @@ var active = false
 var saveAvailable = false
 var continueSaveGame = false
 
+
 const levels = [
+	"res://src/Levels/Level5.tscn",
 	"res://src/Levels/Tut1.tscn",
 	"res://src/Levels/Level1.tscn",
 	"res://src/Levels/Level2.tscn",
 	"res://src/Levels/Level3.tscn",
+	"res://src/Levels/Level4.tscn",
 	"res://src/Levels/LevelEnd.tscn",
 ]
 
@@ -64,7 +68,8 @@ func saveGame(spawn):
 		"time": time,
 		"apples": apples,
 		"spawnx": spawn.x,
-		"spawny": spawn.y
+		"spawny": spawn.y,
+		"key": hasKey
 	}
 	var cfgFile = File.new()
 	cfgFile.open("user://save.cfg", File.WRITE)
@@ -82,6 +87,7 @@ func loadGame():
 		time = data.time
 		apples = data.apples
 		spawn = Vector2(data.spawnx, data.spawny)
+		hasKey = data.key
 		saveAvailable = true
 
 func _input(event):

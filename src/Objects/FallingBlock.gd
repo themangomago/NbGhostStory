@@ -7,6 +7,7 @@ func _ready():
 	reset()
 
 func fallDown():
+	$AudioStreamPlayer2D.play()
 	$AnimationPlayer.play("falldown")
 	$StaticBody2D.hide()
 	$Empty.show()

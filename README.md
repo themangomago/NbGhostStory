@@ -7,10 +7,16 @@
 - [x] Level Finish Screen
 - [x] Highscore Display
 - [x] Bug: New Game Reset Camera
-
 - [x] Save Game / Continue Game
 - [x] Menu Sound
 - [x] Music
+- [x] Level 2 indicator auf full?!
+- [x] L1
+- [x] L2
+- [x] L3
+- [x] L4
+- [x] L5
+- [x] New Title Heading
 
 ### EndScene
 - [ ] Whooping sound
@@ -22,21 +28,11 @@
 - [ ] Tents
 
 ### Levels
-- [x] L1
-- [x] L2
-- [x] L3
-- [ ] L4
-- [ ] L5
-
 - [ ] L6
 - [ ] L7
-- [ ] L8
-- [ ] L9
 - [ ] EndScene
 
-- [ ] Level 2 indicator auf full?!
-- [ ] Bruzel Sound für Lightning
-- [ ] New Title Heading
+- [ ] Music Mute Key and Update Control
 - [ ] Music to Level
 - [ ] Readme
 - [ ] GameJolt Page
@@ -48,14 +44,14 @@ Justifications: https://godotengine.org/qa/39374/godot-xyz-declared-but-never-us
 # Guide Texts
 Tut1: [center]WAAH! .. It worked? A-a-are you Ryan? .. It must be so.[/center]
 L1:   [center]Why you are here? Cuz I've brought you back.[/center]
-L2:   [center]Can't you remember your death? You were MURDERED![/center]
-L3:   [center]I've brought you back to convict the murderer..[/center]
-L4:   [center]You've used to be a cook for the lumberjacks.[/center]
-L5:   [center]Your supplies dwindled, the food ran out.[/center]
-L6:   [center]The camp boss killed you and served you as a meal.[/center]
-L7:   [center]He told the men you've had quit and left the camp.[/center]
-L8:   [center]The men didn't know what they were eating.[/center]
-L9:   [center]Haunt him! Expose his murder. And you will find peace.[/center]
+L1:   [center]Can't you remember your death? You were MURDERED![/center]
+L2:   [center]I've brought you back to convict the murderer..[/center]
+L2:   [center]You've used to be a cook for the lumberjacks.[/center]
+L3:   [center]Your supplies dwindled, the food ran out.[/center]
+L4:   [center]The camp boss killed you and served you as a meal.[/center]
+L5:   [center]He told the men you've had quit and left the camp.[/center]
+L6:   [center]The men didn't know what they were eating.[/center]
+L7:   [center]Haunt him! Expose his murder. And you will find peace.[/center]
 
 EndScene:
 LJ1:   [center]Ahhh a ghost!![/center]

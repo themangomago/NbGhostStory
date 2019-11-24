@@ -37,6 +37,7 @@ var onPlatform = false
 var isOnJumpPad = false
 var isOnTreadMill = false
 var isTransitioning = false
+var hasKeyNotSave = false
 
 onready var trailNode = preload("res://src/Player/PlayerTrail.tscn")
 onready var dustNode = preload("res://src/Player/Dust.tscn")
@@ -55,6 +56,7 @@ func _ready():
 		Global.getCam().switchToScreen(position)
 	else:
 		Global.getCam().reset()
+		gm.hasKey = false
 	
 	
 	$Body.modulate =  Color( 1, 1, 1, 1 )
@@ -106,6 +108,12 @@ func reset():
 	position = restartPoint
 	velocity = Vector2(0, 0)
 	airTime = 0
+	
+	if hasKeyNotSave:
+		hasKeyNotSave = false
+		for key in get_tree().get_nodes_in_group("key"):
+			key.reset()
+		
 	dodgeAvailable = true
 	gm.applesUnsave = 0
 	$Body.position = Vector2(0,0)
@@ -124,6 +132,9 @@ func transition(toNode):
 		
 		gm.apples += gm.applesUnsave
 		gm.applesUnsave = 0
+		
+		if hasKeyNotSave:
+			gm.hasKey = true
 		
 
 func processNormal(delta, inputDirection):
@@ -380,11 +391,15 @@ func spawnDust(id):
 
 
 func kill():
+	#Dbug
+	print("kill")
 	return
+	
 	gm.active = false
 	$AnimationPlayer.play("die")
 	$Sounds/Dead.play()
 	gm.deadCount += 1
+	Global.getCam().shake()
 	
 func _on_Trail_timeout():
 	createTrail()

@@ -48,3 +48,24 @@ func reset():
 #warning-ignore:unused_argument
 func _on_Tween_tween_completed(object, key):
 	state = CamStates.Static
+
+func shake():
+	$ShakeDuration.start()
+	$ShakeStep.start()
+
+func _shake():
+	var shake_amount = 4.0
+
+	self.set_offset(Vector2( \
+		rand_range(-1.0, 1.0) * shake_amount, \
+		rand_range(-1.0, 1.0) * shake_amount \
+	))
+
+
+func _on_ShakeDuration_timeout():
+	$ShakeStep.stop()
+	self.set_offset(Vector2(0,0))
+
+
+func _on_ShakeStep_timeout():
+	_shake()

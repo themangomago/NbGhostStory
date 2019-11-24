@@ -167,6 +167,13 @@ texture = ExtResource( 8 )
 centered = false
 offset = Vector2( -16, -16 )
 
+[node name="ShakeDuration" type="Timer" parent="gameViewport/Viewport/Camera"]
+wait_time = 0.4
+one_shot = true
+
+[node name="ShakeStep" type="Timer" parent="gameViewport/Viewport/Camera"]
+wait_time = 0.1
+
 [node name="menuViewport" type="ViewportContainer" parent="."]
 visible = false
 anchor_right = 1.0
@@ -227,4 +234,6 @@ volume_db = -10.0
 bus = "Music"
 script = ExtResource( 9 )
 [connection signal="tween_completed" from="gameViewport/Viewport/Camera/Tween" to="gameViewport/Viewport/Camera" method="_on_Tween_tween_completed"]
+[connection signal="timeout" from="gameViewport/Viewport/Camera/ShakeDuration" to="gameViewport/Viewport/Camera" method="_on_ShakeDuration_timeout"]
+[connection signal="timeout" from="gameViewport/Viewport/Camera/ShakeStep" to="gameViewport/Viewport/Camera" method="_on_ShakeStep_timeout"]
 [connection signal="finished" from="MusicPlayer" to="MusicPlayer" method="_on_MusicPlayer_finished" flags=3]

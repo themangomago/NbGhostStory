@@ -22,4 +22,5 @@ func _on_Area_body_entered(body):
 		var apples = Global.getGameManager().applesUnsave 
 		Global.getGameManager().applesUnsave = apples + 1
 		remove()
+		$AudioStreamPlayer2D.play()
 		
