@@ -26,12 +26,14 @@ var continueSaveGame = false
 
 
 const levels = [
-	"res://src/Levels/Level5.tscn",
+	"res://src/Levels/EndLevel.tscn",
 	"res://src/Levels/Tut1.tscn",
 	"res://src/Levels/Level1.tscn",
 	"res://src/Levels/Level2.tscn",
 	"res://src/Levels/Level3.tscn",
 	"res://src/Levels/Level4.tscn",
+	"res://src/Levels/Level5.tscn",
+	"res://src/Levels/Level6.tscn",
 	"res://src/Levels/LevelEnd.tscn",
 ]
 
