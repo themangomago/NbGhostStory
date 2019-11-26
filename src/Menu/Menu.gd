@@ -19,7 +19,16 @@ func updateMenu(continueAvailable):
 		$Main/Highscore.hide()
 
 func updateHighscore():
-	$Main/Highscore.bbcode_text = "Highscore\n¦ " + Global.timeToString(Global.userConfig.highscore.time) + "\n€ "+ str(Global.userConfig.highscore.dead) +"\n ~ "+ str(Global.userConfig.highscore.apples) +"\n"
+	$Main/Highscore.bbcode_text = "Highscore\n¦ " + Global.timeToString(Global.userConfig.highscore.time) + "\n€ "+ str(Global.userConfig.highscore.dead) +"\nà "+ str(Global.userConfig.highscore.apples) +"\n"
+
+func advertise():
+	_on_ButtonBack_button_up()
+	
+	if $AdvertiseWindow.visible:
+		$AdvertiseWindow.hide()
+	else:
+		$AdvertiseWindow.show()
+	
 
 func _on_ButtonContinue_button_up():
 	if Global.getGameManager().state == Types.GameStates.Menu:
@@ -112,3 +121,23 @@ func _on_ButtonFullscreen_button_up():
 	updateSettings()
 	$Click.play()
 	
+
+
+func _on_ButtonItch_button_up():
+	$Click.play()
+	OS.shell_open("https://nimblebeasts.itch.io/")
+
+
+func _on_ButtonTwitter_button_up():
+	$Click.play()
+	OS.shell_open("https://twitter.com/nimblebeasts")
+
+
+func _on_ButtonNewsletter_button_up():
+	$Click.play()
+	OS.shell_open("https://nimblebeasts.co")
+
+
+func _on_ButtonGameJolt_button_up():
+	$Click.play()
+	OS.shell_open("https://gamejolt.com/@NimbleBeasts")

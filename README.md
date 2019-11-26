@@ -27,11 +27,11 @@
 - [x] Whooping sound
 - [x] EndScene
 - [x] Music und Sound Tiefpass? Godot?
+- [x] Music Mute Key and Update Control
+- [x] Hinweis auf montly games
 
-
-- [ ] Hinweis auf montly games
-- [ ] Music Mute Key and Update Control
 - [ ] Music to Level
+- [ ] Level Check (Bg, Guide texts)
 
 - [ ] Readme
 - [ ] GameJolt Page

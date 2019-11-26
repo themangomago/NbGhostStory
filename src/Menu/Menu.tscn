@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://assets/art/menu/bg.png" type="Texture" id=1]
 [ext_resource path="res://assets/art/menu/activeButton.png" type="Texture" id=2]
@@ -8,6 +8,9 @@
 [ext_resource path="res://src/Menu/Menu.gd" type="Script" id=6]
 [ext_resource path="res://assets/art/menu/controls.png" type="Texture" id=7]
 [ext_resource path="res://assets/sounds/menu/select.wav" type="AudioStream" id=8]
+[ext_resource path="res://src/Menu/Advertise.tscn" type="PackedScene" id=9]
+[ext_resource path="res://assets/art/menu/advertise.png" type="Texture" id=10]
+[ext_resource path="res://assets/fonts/font33_outline.tres" type="DynamicFont" id=11]
 
 [sub_resource type="DynamicFont" id=1]
 outline_size = 1
@@ -409,10 +412,94 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="Advertise" parent="." instance=ExtResource( 9 )]
+margin_left = 16.0
+margin_top = 112.0
+margin_right = 32.0
+margin_bottom = 128.0
+
+[node name="AdvertiseWindow" type="Sprite" parent="."]
+visible = false
+position = Vector2( 32, 80 )
+texture = ExtResource( 10 )
+centered = false
+
+[node name="Text" type="RichTextLabel" parent="AdvertiseWindow"]
+visible = false
+margin_left = 5.0
+margin_top = 3.0
+margin_right = 136.0
+margin_bottom = 173.0
+custom_fonts/normal_font = ExtResource( 11 )
+bbcode_enabled = true
+bbcode_text = "This game is part of the 'One Game Per Month' collection from NimbleBeasts.
+Make sure you don't miss one and follow us on [color=#9d303b]¥[/color][color=#f5edba]Itch.io[/color],        [color=#c0c741]®[/color][color=#f5edba]GameJolt[/color], [color=#34859d]`[/color][color=#f5edba]Twitter[/color] or subscribe the [color=#f5edba]newsletter[/color].
+
+"
+text = "This game is part of the 'One Game Per Month' collection from NimbleBeasts.
+Make sure you don't miss one and follow us on ¥Itch.io,        ®GameJolt, `Twitter or subscribe the newsletter.
+
+"
+scroll_active = false
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ButtonNewsletter" type="TextureButton" parent="AdvertiseWindow"]
+margin_left = 5.0
+margin_top = 130.0
+margin_right = 71.0
+margin_bottom = 145.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ButtonGameJolt" type="TextureButton" parent="AdvertiseWindow"]
+margin_left = 5.0
+margin_top = 104.0
+margin_right = 61.0
+margin_bottom = 115.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ButtonTwitter" type="TextureButton" parent="AdvertiseWindow"]
+margin_left = 77.0
+margin_top = 104.0
+margin_right = 120.0
+margin_bottom = 115.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ButtonItch" type="TextureButton" parent="AdvertiseWindow"]
+margin_left = 48.0
+margin_top = 89.0
+margin_right = 89.0
+margin_bottom = 100.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
 [node name="Click" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 8 )
 volume_db = -14.0
 bus = "Sounds"
+
+[node name="ButtonTwitter" type="TextureButton" parent="."]
+margin_left = 223.0
+margin_top = 256.0
+margin_right = 309.0
+margin_bottom = 270.0
+
+[node name="ButtonItch" type="TextureButton" parent="."]
+margin_left = 310.0
+margin_top = 256.0
+margin_right = 400.0
+margin_bottom = 270.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
 [connection signal="button_up" from="Main/ButtonExit" to="." method="_on_ButtonExit_button_up"]
 [connection signal="button_up" from="Main/ButtonSettings" to="." method="_on_ButtonSettings_button_up"]
 [connection signal="button_up" from="Main/ButtonControls" to="." method="_on_ButtonControls_button_up"]
@@ -423,3 +510,9 @@ bus = "Sounds"
 [connection signal="button_up" from="Settings/ButtonIndicator" to="." method="_on_ButtonIndicator_button_up"]
 [connection signal="button_up" from="Settings/ButtonFullscreen" to="." method="_on_ButtonFullscreen_button_up"]
 [connection signal="button_up" from="Controls/ButtonBack" to="." method="_on_ButtonBack_button_up"]
+[connection signal="button_up" from="AdvertiseWindow/ButtonNewsletter" to="." method="_on_ButtonNewsletter_button_up"]
+[connection signal="button_up" from="AdvertiseWindow/ButtonGameJolt" to="." method="_on_ButtonGameJolt_button_up"]
+[connection signal="button_up" from="AdvertiseWindow/ButtonTwitter" to="." method="_on_ButtonTwitter_button_up"]
+[connection signal="button_up" from="AdvertiseWindow/ButtonItch" to="." method="_on_ButtonItch_button_up"]
+[connection signal="button_up" from="ButtonTwitter" to="." method="_on_ButtonTwitter_button_up"]
+[connection signal="button_up" from="ButtonItch" to="." method="_on_ButtonItch_button_up"]

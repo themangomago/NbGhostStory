@@ -1,0 +1,59 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://assets/art/menu/exclm.png" type="Texture" id=1]
+[ext_resource path="res://src/Menu/Advertise.gd" type="Script" id=2]
+[ext_resource path="res://assets/art/dummylight.png" type="Texture" id=3]
+
+[sub_resource type="Animation" id=1]
+resource_name = "idle"
+length = 1.2
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:offset")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.3, 0.6, 0.9 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0, 0 ), Vector2( 0, -2 ), Vector2( 0, 0 ), Vector2( 0, -2 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Sprite/Light2D:energy")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.6 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 0.5, 1.0 ]
+}
+
+[node name="Advertise" type="TextureButton"]
+margin_right = 16.0
+margin_bottom = 16.0
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Sprite" type="Sprite" parent="."]
+light_mask = 8
+texture = ExtResource( 1 )
+centered = false
+
+[node name="Light2D" type="Light2D" parent="Sprite"]
+position = Vector2( 8, 8 )
+texture = ExtResource( 3 )
+texture_scale = 0.14
+color = Color( 1, 0.980392, 0.847059, 1 )
+energy = 0.5
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+autoplay = "idle"
+anims/idle = SubResource( 1 )
+[connection signal="button_up" from="." to="." method="_on_Advertise_button_up"]

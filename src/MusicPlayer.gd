@@ -17,12 +17,16 @@ onready var musicTable = [
 
 var stage = 0
 var introFinished = false
-var AudioStream
+var muted = false
 
 func _ready():
 	DebugSetup()
 	if not Global.debug:
 		playMusic(0)
+
+func _physics_process(delta):
+	if Input.is_action_just_pressed("ui_music"):
+		toggleMute()
 
 func DebugSetup():
 	if Global.debug:
@@ -41,6 +45,13 @@ func playMusic(thisStage):
 	introFinished = false
 	self.set_stream(musicTable[stage].intro)
 	self.play()
+
+func toggleMute():
+	muted = !muted
+	if muted:
+		self.volume_db = -72
+	else:
+		self.volume_db = 0
 
 func _on_MusicPlayer_finished():
 	if introFinished == false:

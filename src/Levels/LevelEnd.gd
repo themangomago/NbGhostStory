@@ -8,7 +8,7 @@ func _ready():
 	var apples = Global.getGameManager().apples
 	var time = Global.getGameManager().time
 	var deadCount = Global.getGameManager().deadCount
-	$bg/Highscore.bbcode_text = "[center]Score\n¦ " + Global.timeToString(time) + "\n€ "+ str(deadCount) +"\n ~ "+ str(apples) +"[/center]"
+	$bg/Highscore.bbcode_text = "[center]Score\n¦ " + Global.timeToString(time) + "\n€ "+ str(deadCount) +"\nà "+ str(apples) +"[/center]"
 	$bg.hide()
 	$LevelEndScene.show()
 
