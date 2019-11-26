@@ -26,15 +26,17 @@ var continueSaveGame = false
 
 
 const levels = [
-	"res://src/Levels/EndLevel.tscn",
+
+	
 	"res://src/Levels/Tut1.tscn",
-	"res://src/Levels/Level1.tscn",
-	"res://src/Levels/Level2.tscn",
-	"res://src/Levels/Level3.tscn",
-	"res://src/Levels/Level4.tscn",
-	"res://src/Levels/Level5.tscn",
-	"res://src/Levels/Level6.tscn",
 	"res://src/Levels/LevelEnd.tscn",
+#	"res://src/Levels/Level1.tscn",
+#	"res://src/Levels/Level2.tscn",
+#	"res://src/Levels/Level3.tscn",
+#	"res://src/Levels/Level4.tscn",
+#	"res://src/Levels/Level5.tscn",
+#	"res://src/Levels/Level6.tscn",
+	
 ]
 
 func _ready():
@@ -188,6 +190,7 @@ func newGame():
 	$gameViewport/Viewport/Camera.reset()
 	stateTransition(Types.GameStates.Game)
 	active = true
+	Global.setLowPassFilter(false)
 
 func setLights(state):
 	Global.userConfig.lights = state

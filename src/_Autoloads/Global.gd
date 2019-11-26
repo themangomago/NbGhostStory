@@ -53,6 +53,7 @@ var rng = RandomNumberGenerator.new()
 var stateSeed = int(3458764513820540928)
 
 var upscale = 2
+var audioFilter = null
 
 ###############################################################################
 # Functions
@@ -170,3 +171,21 @@ func timeToString(time):
 	var seconds = "%02d" % [int(time) % 60]
 	var ms = "%03d" % [int(time*1000) % 1000]
 	return str("" + minutes + ":" + seconds + ":"+ ms)
+
+
+func setLowPassFilter(val):
+	var id = AudioServer.get_bus_index("Master")
+#	if audioFilter == null:
+#		audioFilter = AudioEffectLowPassFilter.new()
+#		audioFilter.cutoff_hz = 800
+#		audioFilter.db = 6
+#		AudioServer.add_bus_effect(id, audioFilter)
+	
+	if val:
+		AudioServer.set_bus_effect_enabled(id, 0, true)
+	else:
+		AudioServer.set_bus_effect_enabled(id, 0, false)
+	
+	#print(AudioServer.is_bus_effect_enabled(id, 0))
+	return
+	

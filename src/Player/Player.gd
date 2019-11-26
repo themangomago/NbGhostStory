@@ -57,7 +57,7 @@ func _ready():
 	else:
 		Global.getCam().reset()
 		gm.hasKey = false
-	
+	Global.setLowPassFilter(false)
 	
 	$Body.modulate =  Color( 1, 1, 1, 1 )
 	$Body.position = Vector2(0,0)
@@ -108,6 +108,7 @@ func reset():
 	position = restartPoint
 	velocity = Vector2(0, 0)
 	airTime = 0
+	Global.setLowPassFilter(false)
 	
 	if hasKeyNotSave:
 		hasKeyNotSave = false
@@ -329,9 +330,11 @@ func performDig(target):
 		$Tweens/Dig.interpolate_property(self, 'global_position', global_position, targetPos, 0.25, Tween.TRANS_QUART, Tween.EASE_OUT)
 		$Tweens/Dig.start()
 		if digged:
+			Global.setLowPassFilter(false)
 			$AnimationPlayer.play("undig")
 			$Sounds/Undig.play()
 		else:
+			Global.setLowPassFilter(true)
 			$AnimationPlayer.play("dig")
 			$Sounds/Dig.play()
 		

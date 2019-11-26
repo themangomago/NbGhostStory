@@ -19,7 +19,7 @@ func _ready():
 func DebugSetup():
 	if Global.debug:
 		debugCat = Debug.addCategory("SpawnAt")
-		print("cat: " + str(debugCat))
+		#print("cat: " + str(debugCat))
 		Debug.clearOptions(debugCat)
 		for spawn in get_tree().get_nodes_in_group("spawn"):
 			#addOption(category, optionName, callback, parameter):
@@ -29,7 +29,7 @@ func DebugPortPlayer(to):
 	assert(player != null)
 	for spawn in get_tree().get_nodes_in_group("spawn"):
 		if spawn.name == to:
-			print(spawn.get_global_position())
+			#print(spawn.get_global_position())
 			player.position = spawn.get_global_position()
 			player.restartPoint = spawn.get_global_position()
 			# var pos = (player.position / Vector2(480, 272))

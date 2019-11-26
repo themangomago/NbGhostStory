@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/klonk.wav-9cee6d5e4428b6151f12640377a84668.sample"
+
+[deps]
+
+source_file="res://assets/sounds/klonk.wav"
+dest_files=[ "res://.import/klonk.wav-9cee6d5e4428b6151f12640377a84668.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

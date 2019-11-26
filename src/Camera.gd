@@ -20,7 +20,7 @@ func DebugGetPosition(to):
 	print(position)
 
 func switchToScreen(to):
-	print("switchToScreen" + str(to) )
+	#print("switchToScreen" + str(to) )
 	var pos = (to / Vector2(480, 272))
 	if pos.y < 0: pos.y -= 1
 	if pos.x < 0: pos.x -= 1
@@ -28,7 +28,7 @@ func switchToScreen(to):
 	position = pos * Vector2(480, 272)
 
 func transitionToScreen(to):
-	print("transitionToScreen" + str(to) )
+	#print("transitionToScreen" + str(to) )
 	var pos = (to / Vector2(480, 272))
 	if pos.y < 0: pos.y -= 1
 	if pos.x < 0: pos.x -= 1
@@ -39,7 +39,7 @@ func transitionToScreen(to):
 	state = CamStates.Transition
 
 func reset():
-	print("reset cam")
+	#print("reset cam")
 	tween.stop_all()
 	position = Vector2(0, 0)
 	state = CamStates.Static

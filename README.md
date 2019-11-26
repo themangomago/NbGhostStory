@@ -24,13 +24,15 @@
 - [x] LJ3: Idle, angry
 - [x] Bonfire
 - [x] Tents
+- [x] Whooping sound
+- [x] EndScene
+- [x] Music und Sound Tiefpass? Godot?
 
-- [ ] Whooping sound
-- [ ] EndScene
-- [ ] Music und Sound Tiefpass? Godot?
+
 - [ ] Hinweis auf montly games
 - [ ] Music Mute Key and Update Control
 - [ ] Music to Level
+
 - [ ] Readme
 - [ ] GameJolt Page
 - [ ] Itch Page
@@ -51,12 +53,12 @@ L6:   [center]The men didn't know what they were eating.[/center]
 L7:   [center]Haunt him! Expose his murder. And you will find peace.[/center]
 
 EndScene:
-LJ1:   [center]Did you hear that?[/center]
-Boss:  Pulls out knive [center]Who is there? Show yourself![/center]
-LJ2:   [center]Hey, isn't that Ryans' knive? [/center]
-Boss:  [center]...[/center]
-LJ1:   [center]That is his knive! What did you do to him?[/center]
-Boss:  Lowering head
-LJ2:   [center]He is a murderer! Get him![/center]
+LJ1:  1 [center]Did you hear that?[/center]
+Boss: 2 Pulls out knive [center]Who is there? Show yourself![/center]
+LJ2:  3 [center]Hey, isn't that Ryans' knive?[/center]
+Boss: 4 [center]...[/center]
+LJ1:  5 [center]What have you done to him?[/center]
+Boss: 6 Lowering head
+LJ2:  7 [center]He is a murderer! Get him![/center]
 Fade Out
 Score Scene

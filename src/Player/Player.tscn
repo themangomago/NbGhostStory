@@ -190,6 +190,7 @@ visible = false
 texture = ExtResource( 2 )
 
 [node name="Body" type="Sprite" parent="."]
+modulate = Color( 1, 1, 1, 0 )
 texture = ExtResource( 1 )
 offset = Vector2( 0, -2 )
 hframes = 14
