@@ -25,16 +25,19 @@
 script = ExtResource( 5 )
 
 [node name="LevelDebug" type="Sprite" parent="."]
+visible = false
 position = Vector2( 480, 0 )
 texture = ExtResource( 1 )
 centered = false
 
 [node name="LevelDebug2" type="Sprite" parent="."]
+visible = false
 position = Vector2( 480, 270 )
 texture = ExtResource( 1 )
 centered = false
 
 [node name="LevelDebug3" type="Sprite" parent="."]
+visible = false
 position = Vector2( 960, 270 )
 texture = ExtResource( 1 )
 centered = false
@@ -542,5 +545,8 @@ __meta__ = {
 
 [node name="Guide" parent="Decoration" instance=ExtResource( 21 )]
 position = Vector2( 1024, 368 )
-text = "[center]WAAH! .. It worked? A-a-are you Ryan? .. It must be so.[/center]"
-suprise = true
+text = "[center]You've used to be a cook for the lumberjacks.[/center]"
+
+[node name="Guide2" parent="Decoration" instance=ExtResource( 21 )]
+position = Vector2( 416, 160 )
+text = "[center]I've brought you back to convict the murderer..[/center]"

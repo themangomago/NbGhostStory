@@ -536,8 +536,7 @@ __meta__ = {
 
 [node name="Guide" parent="Decoration" instance=ExtResource( 21 )]
 position = Vector2( 592, -48 )
-text = "[center]Why you are here? Cuz I've brought you back.[/center]"
-suprise = true
+text = "[center]Your supplies dwindled, the food ran out.[/center]"
 
 [node name="Moon" parent="Decoration" instance=ExtResource( 13 )]
 position = Vector2( 576, -544 )

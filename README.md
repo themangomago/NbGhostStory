@@ -30,8 +30,8 @@
 - [x] Music Mute Key and Update Control
 - [x] Hinweis auf montly games
 
-- [ ] Music to Level
-- [ ] Level Check (Bg, Guide texts)
+- [x] Music to Level
+- [x] Level Check (Bg, Guide texts)
 
 - [ ] Readme
 - [ ] GameJolt Page
@@ -48,9 +48,10 @@ L2:   [center]I've brought you back to convict the murderer..[/center]
 L2:   [center]You've used to be a cook for the lumberjacks.[/center]
 L3:   [center]Your supplies dwindled, the food ran out.[/center]
 L4:   [center]The camp boss killed you and served you as a meal.[/center]
-L5:   [center]He told the men you've had quit and left the camp.[/center]
-L6:   [center]The men didn't know what they were eating.[/center]
-L7:   [center]Haunt him! Expose his murder. And you will find peace.[/center]
+L4:   [center]He told the men you've had quit and left the camp.[/center]
+
+L5:   [center]The men didn't know what they were eating.[/center]
+L5:   [center]To find peace, you must expose him![/center]
 
 EndScene:
 LJ1:  1 [center]Did you hear that?[/center]

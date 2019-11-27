@@ -38,6 +38,7 @@ var isOnJumpPad = false
 var isOnTreadMill = false
 var isTransitioning = false
 var hasKeyNotSave = false
+var godMode = false
 
 onready var trailNode = preload("res://src/Player/PlayerTrail.tscn")
 onready var dustNode = preload("res://src/Player/Dust.tscn")
@@ -76,10 +77,16 @@ func _ready():
 func DebugSetup():
 	if Global.debug:
 		var debugCat = Debug.addCategory("PlayerInfo")
+		Debug.clearOptions(debugCat)
 		Debug.addOption(debugCat, "Position" , funcref(self, "DebugGetPosition"), null)
+		Debug.addOption(debugCat, "GodMode Toggle" , funcref(self, "DebugToggleGodMode"), null)
 
 func DebugGetPosition(to):
 	print(position)
+
+func DebugToggleGodMode(nil):
+	godMode = !godMode
+	print("GodMode: " + str(godMode))
 
 func _physics_process(delta):
 	$Help.updateUI(hasJumped, dodgeAvailable)
@@ -394,15 +401,14 @@ func spawnDust(id):
 
 
 func kill():
-	#Dbug
-	print("kill")
-	return
-	
-	gm.active = false
-	$AnimationPlayer.play("die")
-	$Sounds/Dead.play()
-	gm.deadCount += 1
-	Global.getCam().shake()
+	if not godMode:
+		gm.active = false
+		$AnimationPlayer.play("die")
+		$Sounds/Dead.play()
+		gm.deadCount += 1
+		Global.getCam().shake()
+	else:
+		print("GodMode: Not died.")
 	
 func _on_Trail_timeout():
 	createTrail()

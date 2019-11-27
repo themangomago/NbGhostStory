@@ -15,14 +15,15 @@ onready var musicTable = [
 	{"intro": preload("res://assets/music/4Intro.wav"), "loop": preload("res://assets/music/4Loop.wav")}
 ]
 
-var stage = 0
+var stage = -1
 var introFinished = false
 var muted = false
 
 func _ready():
 	DebugSetup()
-	if not Global.debug:
-		playMusic(0)
+	Global.setMusic(self)
+#	if not Global.debug:
+#		playMusic(0)
 
 func _physics_process(delta):
 	if Input.is_action_just_pressed("ui_music"):
@@ -38,13 +39,14 @@ func DebugSetup():
 		Debug.addOption(debugCat, "Play 4 " , funcref(self, "playMusic"), 4)
 
 func playMusic(thisStage):
-	stage = thisStage
-	if self.is_playing():
-		self.stop()
-	
-	introFinished = false
-	self.set_stream(musicTable[stage].intro)
-	self.play()
+	if stage != thisStage:
+		stage = thisStage
+		if self.is_playing():
+			self.stop()
+		
+		introFinished = false
+		self.set_stream(musicTable[stage].intro)
+		self.play()
 
 func toggleMute():
 	muted = !muted

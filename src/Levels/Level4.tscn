@@ -26,11 +26,13 @@
 script = ExtResource( 5 )
 
 [node name="LevelDebug" type="Sprite" parent="."]
+visible = false
 position = Vector2( 0, -272 )
 texture = ExtResource( 1 )
 centered = false
 
 [node name="LevelDebug2" type="Sprite" parent="."]
+visible = false
 position = Vector2( 480, -272 )
 texture = ExtResource( 1 )
 centered = false
@@ -39,6 +41,7 @@ __meta__ = {
 }
 
 [node name="LevelDebug3" type="Sprite" parent="."]
+visible = false
 position = Vector2( 480, 0 )
 texture = ExtResource( 1 )
 centered = false
@@ -376,5 +379,8 @@ __meta__ = {
 
 [node name="Guide" parent="Decoration" instance=ExtResource( 21 )]
 position = Vector2( 304, -48 )
-text = "[center]WAAH! .. It worked? A-a-are you Ryan? .. It must be so.[/center]"
-suprise = true
+text = "[center]The camp boss killed you and served you as a meal.[/center]"
+
+[node name="Guide2" parent="Decoration" instance=ExtResource( 21 )]
+position = Vector2( 800, 192 )
+text = "[center]He told the men you've had quit and left the camp.[/center]"

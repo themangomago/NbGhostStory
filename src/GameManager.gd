@@ -26,17 +26,14 @@ var continueSaveGame = false
 
 
 const levels = [
-
-	
-	"res://src/Levels/Tut1.tscn",
-	"res://src/Levels/LevelEnd.tscn",
-#	"res://src/Levels/Level1.tscn",
-#	"res://src/Levels/Level2.tscn",
-#	"res://src/Levels/Level3.tscn",
-#	"res://src/Levels/Level4.tscn",
-#	"res://src/Levels/Level5.tscn",
-#	"res://src/Levels/Level6.tscn",
-	
+	{"level":"res://src/Levels/Tut1.tscn", "music": 0},
+	{"level":"res://src/Levels/Level1.tscn", "music": 1},
+	{"level":"res://src/Levels/Level2.tscn", "music": 2},
+	{"level":"res://src/Levels/Level3.tscn", "music": 3},
+	{"level":"res://src/Levels/Level4.tscn", "music": 1},
+	{"level":"res://src/Levels/Level5.tscn", "music": 2},
+	{"level":"res://src/Levels/Level6.tscn", "music": 4},
+	{"level":"res://src/Levels/LevelEnd.tscn", "music": 3},
 ]
 
 func _ready():
@@ -49,7 +46,13 @@ func _ready():
 	# Init HUD
 	Global.getHUD().init()
 	
+	# Setup Music
+	Global.setLowPassFilter(false)
+	Global.getMusic().playMusic(0)
+	
 	stateTransition(Types.GameStates.Menu)
+	
+
 
 
 
@@ -149,11 +152,12 @@ func stateTransition(to):
 	state = to
 
 func loadLevel(number = 0):
-	levelNode = load(levels[number]).instance()
+	levelNode = load(levels[number].level).instance()
 	$gameViewport.get_node("Viewport/LevelHolder").add_child(levelNode)
 	updateLights()
 	$gameViewport/Viewport/AnimationLevelFade.play("levelFade")
 	updateHelpIndicator()
+	Global.getMusic().playMusic(levels[number].music)
 
 func unloadLevel():
 	$gameViewport.get_node("Viewport/LevelHolder").remove_child(levelNode)

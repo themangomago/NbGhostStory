@@ -16,7 +16,7 @@ extends Node
 # Version
 const version = {
 	"major": 0,
-	"minor": 1
+	"minor": 99
 }
 
 # Nb Plugin Config
@@ -43,6 +43,7 @@ var gm = null
 var cam = null
 var hud = null
 var menu = null
+var music = null
 
 # Debug Label
 var debugLabel = null
@@ -78,6 +79,13 @@ func setHUD(node):
 
 func getHUD():
 	return hud
+
+func setMusic(node):
+	music = node
+
+func getMusic():
+	return music
+
 
 func _ready():
 	print("Starting: " + str(ProjectSettings.get_setting("application/config/name")) + " v" + getVersionString())
