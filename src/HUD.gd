@@ -26,7 +26,6 @@ func _physics_process(delta):
 		var time = gm.time
 		
 		var timeString = Global.timeToString(time)
-		
 		$Time.set_text("¦ " +  timeString)
 		
 		$Dead.set_text("€ " + str(gm.deadCount))

@@ -33,9 +33,9 @@
 - [x] Music to Level
 - [x] Level Check (Bg, Guide texts)
 
-- [ ] Readme
-- [ ] GameJolt Page
-- [ ] Itch Page
+- [x] Readme
+- [x] GameJolt Page
+- [x] Itch Page
 
 Justifications: https://godotengine.org/qa/39374/godot-xyz-declared-but-never-used-the-script-how-store-vars-now
 
