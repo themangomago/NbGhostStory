@@ -1,65 +1,28 @@
-# NbOddly
+# Ghost Story
 
-## TODOs
-
-- [x] Controller Help Y Key
-- [x] Landing Dust Animation
-- [x] Level Finish Screen
-- [x] Highscore Display
-- [x] Bug: New Game Reset Camera
-- [x] Save Game / Continue Game
-- [x] Menu Sound
-- [x] Music
-- [x] Level 2 indicator auf full?!
-- [x] L1
-- [x] L2
-- [x] L3
-- [x] L4
-- [x] L5
-- [x] L6
-- [x] New Title Heading
-- [x] Boss Char: idle, knive pull, lowering head
-- [x] LJ1: frighten, idle
-- [x] LJ2: Idle
-- [x] LJ3: Idle, angry
-- [x] Bonfire
-- [x] Tents
-- [x] Whooping sound
-- [x] EndScene
-- [x] Music und Sound Tiefpass? Godot?
-- [x] Music Mute Key and Update Control
-- [x] Hinweis auf montly games
-
-- [x] Music to Level
-- [x] Level Check (Bg, Guide texts)
-
-- [x] Readme
-- [x] GameJolt Page
-- [x] Itch Page
-
-Justifications: https://godotengine.org/qa/39374/godot-xyz-declared-but-never-used-the-script-how-store-vars-now
+The NimbleBeasts Ghost Story is a Celstes-like platformer game with a small twist. As a ghost the player can cross simple walls or hide inside to avoid obstacles. The story of "Ghost Story" is a Canadian folklore called "Dungarvon Whooper". The young Irish cook Ryan was the victim of a heinous crime. He returns as a ghost to convict the murderer to find peace.
 
 
-# Guide Texts
-Tut1: [center]WAAH! .. It worked? A-a-are you Ryan? .. It must be so.[/center]
-L1:   [center]Why you are here? Cuz I've brought you back.[/center]
-L1:   [center]Can't you remember your death? You were MURDERED![/center]
-L2:   [center]I've brought you back to convict the murderer..[/center]
-L2:   [center]You've used to be a cook for the lumberjacks.[/center]
-L3:   [center]Your supplies dwindled, the food ran out.[/center]
-L4:   [center]The camp boss killed you and served you as a meal.[/center]
-L4:   [center]He told the men you've had quit and left the camp.[/center]
+![Screenshot](https://img.itch.zone/aW1hZ2UvNTkyOTUyLzMxMzYyNzgucG5n/original/mzLmr%2B.png)
 
-L5:   [center]The men didn't know what they were eating.[/center]
-L5:   [center]To find peace, you must expose him![/center]
 
-EndScene:
-LJ1:  1 [center]Did you hear that?[/center]
-Boss: 2 Pulls out knive [center]Who is there? Show yourself![/center]
-LJ2:  3 [center]Hey, isn't that Ryans' knive?[/center]
-Boss: 4 [center]...[/center]
-LJ1:  5 [center]What have you done to him?[/center]
-Boss: 6 Lowering head
-LJ2:  7 [center]He is a murderer! Get him![/center]
-Fade Out
-Score Scene
+Features:
+
+- Estimated average playing time ~30mins (Speedruns welcome)
+
+- 7 Levels with increasing difficulty
+
+- Many obstacles and hurdles
+
+- 5 Music tracks
+
+- Tons of restarts and deaths
+
+Controls:
+
+Support for keyboard and controller. See in-game option 'Controls'
+
+[Get it on Itch.io](https://nimblebeastscollective.itch.io/nb-ghost-story)
+
+# License
+All rights reserved. Released for educational purpose.
